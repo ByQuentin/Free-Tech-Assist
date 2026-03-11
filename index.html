@@ -703,60 +703,70 @@ function showToast(msg) {
 
 function genererRefus(){
 
+// Canvas format A4 en haute résolution (210mm x 297mm à 300dpi)
 const canvas = document.createElement("canvas");
-canvas.width = 1240;
-canvas.height = 1754;
+canvas.width = 2480;  // A4 width at 300dpi
+canvas.height = 3508; // A4 height at 300dpi
 
 const ctx = canvas.getContext("2d");
 
-/* fond blanc */
+// Fond blanc
 ctx.fillStyle = "#ffffff";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// Marges
+const marginLeft = 180;
+const marginRight = 180;
+const contentWidth = canvas.width - marginLeft - marginRight;
+
+let y = 200;
 
 /* ══════════════════════════════════════════════════════════════════
-   LOGO FREE + TITRE
+   LOGO FREE
    ══════════════════════════════════════════════════════════════════ */
 
-// Logo "free" en rouge (italique stylisé)
 ctx.fillStyle = "#c8102e";
-ctx.font = "italic bold 72px Arial";
-ctx.fillText("free", 90, 100);
+ctx.font = "italic bold 140px Arial";
+ctx.fillText("free", marginLeft, y);
+y += 40;
 
-// Ligne horizontale sous le logo
-ctx.strokeStyle = "#ddd";
-ctx.lineWidth = 2;
+// Ligne horizontale grise
+ctx.strokeStyle = "#cccccc";
+ctx.lineWidth = 3;
 ctx.beginPath();
-ctx.moveTo(90, 130);
-ctx.lineTo(1150, 130);
+ctx.moveTo(marginLeft, y);
+ctx.lineTo(canvas.width - marginRight, y);
 ctx.stroke();
+y += 120;
 
-// Titre principal
-ctx.fillStyle = "#000";
-ctx.font = "bold 32px Arial";
+/* ══════════════════════════════════════════════════════════════════
+   TITRE
+   ══════════════════════════════════════════════════════════════════ */
+
+ctx.fillStyle = "#000000";
+ctx.font = "bold 56px Arial";
 ctx.textAlign = "center";
-ctx.fillText("CONSTAT DE REFUS D'INSTALLATION DE LA FIBRE OPTIQUE", 620, 190);
+ctx.fillText("CONSTAT DE REFUS D'INSTALLATION DE LA FIBRE OPTIQUE", canvas.width / 2, y);
 ctx.textAlign = "left";
-
-let y = 250;
+y += 120;
 
 /* ══════════════════════════════════════════════════════════════════
    INFORMATIONS RELATIVES À L'INTERVENTION
    ══════════════════════════════════════════════════════════════════ */
 
-// Section title
-ctx.fillStyle = "#000";
-ctx.font = "bold 22px Arial";
-ctx.fillText("Informations relatives à l'intervention", 90, y);
-y += 10;
+ctx.font = "bold 36px Arial";
+ctx.fillStyle = "#000000";
+ctx.fillText("Informations relatives à l'intervention", marginLeft, y);
+y += 15;
 
 // Ligne sous le titre
-ctx.strokeStyle = "#333";
-ctx.lineWidth = 1;
+ctx.strokeStyle = "#666666";
+ctx.lineWidth = 2;
 ctx.beginPath();
-ctx.moveTo(90, y);
-ctx.lineTo(1150, y);
+ctx.moveTo(marginLeft, y);
+ctx.lineTo(canvas.width - marginRight, y);
 ctx.stroke();
-y += 30;
+y += 50;
 
 // Récupération des données
 const nomTech = document.getElementById("r_nom_tech").value || "";
@@ -766,178 +776,225 @@ const lieuInterv = document.getElementById("r_lieu").value || "";
 const idc = document.getElementById("r_idc").value || "";
 const commande = document.getElementById("r_commande").value || "";
 
-// Affichage des infos
-ctx.font = "18px Arial";
-ctx.fillStyle = "#666";
-ctx.fillText("Nom, Prénom de l'intervenant :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(nomTech, 420, y);
-y += 35;
+ctx.font = "32px Arial";
+ctx.fillStyle = "#000000";
 
-ctx.fillStyle = "#666";
-ctx.fillText("Date de l'intervention", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(dateInterv, 420, y);
-y += 35;
+// Nom intervenant
+ctx.fillText("Nom, Prénom de l'intervenant : " + nomTech, marginLeft, y);
+y += 55;
 
-ctx.fillStyle = "#666";
-ctx.fillText("Heure de l'intervention :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(heureInterv, 420, y);
-y += 35;
+// Date
+ctx.fillText("Date de l'intervention", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.lineWidth = 1;
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(dateInterv, marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("Lieu de l'intervention", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(lieuInterv, 420, y);
-y += 35;
+// Heure
+ctx.fillText("Heure de l'intervention :", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(heureInterv, marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("Numéro abonné IDC :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(idc, 420, y);
-y += 35;
+// Lieu
+ctx.fillText("Lieu de l'intervention", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(lieuInterv, marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("Numéro de commande", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(commande, 420, y);
-y += 45;
+// IDC
+ctx.fillText("Numéro abonné IDC :", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(idc, marginLeft + 20, y + 37);
+y += 65;
+
+// Commande
+ctx.fillText("Numéro de commande", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(commande, marginLeft + 20, y + 37);
+y += 85;
 
 /* ══════════════════════════════════════════════════════════════════
    INFORMATIONS RELATIVES À L'ABONNÉ
    ══════════════════════════════════════════════════════════════════ */
 
-ctx.fillStyle = "#000";
-ctx.font = "bold 22px Arial";
-ctx.fillText("Informations relatives à l'abonné", 90, y);
-ctx.font = "italic 16px Arial";
-ctx.fillStyle = "#666";
-ctx.fillText("(ou son représentant)", 480, y);
-y += 10;
+ctx.font = "bold 36px Arial";
+ctx.fillStyle = "#000000";
+ctx.fillText("Informations relatives à l'abonné ", marginLeft, y);
 
-ctx.strokeStyle = "#333";
-ctx.lineWidth = 1;
+ctx.font = "italic 28px Arial";
+ctx.fillStyle = "#666666";
+ctx.fillText("(ou son représentant) :", marginLeft + 710, y);
+y += 15;
+
+ctx.strokeStyle = "#666666";
+ctx.lineWidth = 2;
 ctx.beginPath();
-ctx.moveTo(90, y);
-ctx.lineTo(1150, y);
+ctx.moveTo(marginLeft, y);
+ctx.lineTo(canvas.width - marginRight, y);
 ctx.stroke();
-y += 30;
+y += 50;
 
 // Récupération civilité
-const civilite = document.getElementById("r_mme").checked ? "Mme" : 
-                 document.getElementById("r_mr").checked ? "Mr" : "";
-
+const isMme = document.getElementById("r_mme").checked;
+const isMr = document.getElementById("r_mr").checked;
 const nomAbo = document.getElementById("r_nom_abo").value || "";
 const prenomAbo = document.getElementById("r_prenom_abo").value || "";
 const emailAbo = document.getElementById("r_email_abo").value || "";
 const telAbo = document.getElementById("r_tel_abo").value || "";
 
-ctx.font = "18px Arial";
-ctx.fillStyle = "#000";
-ctx.fillText("Je soussigné(e) : ", 90, y);
+ctx.font = "32px Arial";
+ctx.fillStyle = "#000000";
+ctx.fillText("Je soussigné(e) :", marginLeft, y);
 
 // Checkboxes civilité
-const boxSize = 18;
-const boxX1 = 260;
-const boxX2 = 340;
+const boxSize = 30;
+const checkX1 = marginLeft + 410;
+const checkX2 = checkX1 + 150;
 
 // Checkbox Mme
-ctx.strokeStyle = "#666";
-ctx.lineWidth = 1.5;
-ctx.strokeRect(boxX1, y - boxSize + 4, boxSize, boxSize);
-if (civilite === "Mme") {
-  ctx.fillStyle = "#c8102e";
-  ctx.fillRect(boxX1 + 3, y - boxSize + 7, boxSize - 6, boxSize - 6);
+ctx.strokeStyle = "#000000";
+ctx.lineWidth = 2;
+ctx.strokeRect(checkX1, y - boxSize + 5, boxSize, boxSize);
+if (isMme) {
+  ctx.fillStyle = "#000000";
+  ctx.font = "bold 36px Arial";
+  ctx.fillText("✓", checkX1 + 5, y + 3);
 }
-ctx.fillStyle = "#000";
-ctx.fillText("Mme", boxX1 + boxSize + 8, y);
+ctx.fillStyle = "#000000";
+ctx.font = "32px Arial";
+ctx.fillText("Mme", checkX1 + boxSize + 20, y);
 
 // Checkbox Mr
-ctx.strokeRect(boxX2, y - boxSize + 4, boxSize, boxSize);
-if (civilite === "Mr") {
-  ctx.fillStyle = "#c8102e";
-  ctx.fillRect(boxX2 + 3, y - boxSize + 7, boxSize - 6, boxSize - 6);
+ctx.strokeRect(checkX2, y - boxSize + 5, boxSize, boxSize);
+if (isMr) {
+  ctx.fillStyle = "#000000";
+  ctx.font = "bold 36px Arial";
+  ctx.fillText("✓", checkX2 + 5, y + 3);
 }
-ctx.fillStyle = "#000";
-ctx.fillText("Mr", boxX2 + boxSize + 8, y);
+ctx.fillStyle = "#000000";
+ctx.font = "32px Arial";
+ctx.fillText("Mr", checkX2 + boxSize + 20, y);
+y += 55;
 
-y += 35;
+// NOM
+ctx.fillText("NOM:", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(nomAbo.toUpperCase(), marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("NOM:", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(nomAbo.toUpperCase(), 160, y);
-y += 35;
+// Prénom
+ctx.fillText("Prénom :", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(prenomAbo, marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("Prénom :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(prenomAbo, 180, y);
-y += 35;
+// Email
+ctx.fillText("E-mail :", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(emailAbo, marginLeft + 20, y + 37);
+y += 65;
 
-ctx.fillStyle = "#666";
-ctx.fillText("E-mail :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(emailAbo, 180, y);
-y += 35;
-
-ctx.fillStyle = "#666";
-ctx.fillText("N° de téléphone :", 90, y);
-ctx.fillStyle = "#000";
-ctx.fillText(telAbo, 260, y);
-y += 50;
+// Téléphone
+ctx.fillText("N° de téléphone :", marginLeft, y);
+y += 10;
+ctx.fillStyle = "#f0f0f0";
+ctx.fillRect(marginLeft, y, contentWidth, 50);
+ctx.strokeStyle = "#cccccc";
+ctx.strokeRect(marginLeft, y, contentWidth, 50);
+ctx.fillStyle = "#000000";
+ctx.fillText(telAbo, marginLeft + 20, y + 37);
+y += 85;
 
 /* ══════════════════════════════════════════════════════════════════
    DÉCLARATION DE REFUS
    ══════════════════════════════════════════════════════════════════ */
 
-ctx.font = "17px Arial";
-ctx.fillStyle = "#000";
-const declarationText = "Je déclare refuser l'installation de la fibre optique initialement prévue dans mon local, et demander à";
-ctx.fillText(declarationText, 90, y);
-y += 24;
-ctx.fillText("passer / rester (rayer la mention inutile) en ADSL pour les raisons suivantes :", 90, y);
-y += 40;
+ctx.font = "30px Arial";
+ctx.fillStyle = "#000000";
 
-// Liste des raisons
-let raisons = [];
+const line1 = "Je déclare refuser l'installation de la fibre optique initialement prévue dans mon local, et demander à";
+const line2 = "passer / rester (rayer la mention inutile) en ADSL pour les raisons suivantes :";
 
-if(document.getElementById("rcb_syndic").checked)
-  raisons.push("Le Syndic refuse l'appareil dans les parties communes");
+ctx.fillText(line1, marginLeft, y);
+y += 45;
+ctx.fillText(line2, marginLeft, y);
+y += 65;
 
-if(document.getElementById("rcb_local").checked)
-  raisons.push("Je refuse l'appareil dans mon local ;");
+// Liste des raisons avec checkboxes
+const checkBoxSize = 28;
+const reasons = [
+  { id: "rcb_syndic", text: "Le Syndic refuse l'appareil dans les parties communes" },
+  { id: "rcb_local", text: "Je refuse l'appareil dans mon local ;" },
+  { id: "rcb_travaux", text: "Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux ;" },
+  { id: "rcb_proprio", text: "Le propriétaire refuse tous travaux dans le local ;" },
+  { id: "rcb_adsl", text: "Je suis satisfait de l'ADSL et ne veux pas la fibre ;" },
+  { id: "rcb_delai", text: "Délai des travaux supérieur à 45 jours." }
+];
 
-if(document.getElementById("rcb_travaux").checked)
-  raisons.push("Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux ;");
-
-if(document.getElementById("rcb_proprio").checked)
-  raisons.push("Le propriétaire refuse tous travaux dans le local ;");
-
-if(document.getElementById("rcb_adsl").checked)
-  raisons.push("Je suis satisfait de l'ADSL et ne veux pas la fibre ;");
-
-if(document.getElementById("rcb_delai").checked)
-  raisons.push("Délai des travaux supérieur à 45 jours.");
-
-// Affichage des raisons avec checkboxes
-ctx.font = "16px Arial";
-raisons.forEach(raison => {
-  // Checkbox cochée
-  ctx.strokeStyle = "#666";
-  ctx.lineWidth = 1.5;
-  ctx.strokeRect(110, y - boxSize + 4, boxSize, boxSize);
-  ctx.fillStyle = "#c8102e";
-  ctx.fillRect(113, y - boxSize + 7, boxSize - 6, boxSize - 6);
+ctx.font = "28px Arial";
+reasons.forEach(reason => {
+  const isChecked = document.getElementById(reason.id).checked;
+  
+  // Dessiner checkbox
+  ctx.strokeStyle = "#000000";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(marginLeft + 30, y - checkBoxSize + 5, checkBoxSize, checkBoxSize);
+  
+  if (isChecked) {
+    ctx.fillStyle = "#000000";
+    ctx.font = "bold 32px Arial";
+    ctx.fillText("✓", marginLeft + 33, y + 3);
+    ctx.font = "28px Arial";
+  }
   
   // Texte
-  ctx.fillStyle = "#000";
-  ctx.fillText(raison, 140, y);
-  y += 28;
+  ctx.fillStyle = "#000000";
+  ctx.fillText(reason.text, marginLeft + 80, y);
+  y += 50;
 });
 
-y += 15;
+y += 30;
 
 /* ══════════════════════════════════════════════════════════════════
    COMMENTAIRES
@@ -946,46 +1003,44 @@ y += 15;
 const cmtAbo = document.getElementById("r_cmt_abo").value || "";
 const cmtTech = document.getElementById("r_cmt_tech").value || "";
 
-ctx.font = "18px Arial";
-ctx.fillStyle = "#000";
-ctx.fillText("Commentaires de l'abonné :", 90, y);
-y += 30;
+ctx.font = "32px Arial";
+ctx.fillStyle = "#000000";
+ctx.fillText("Commentaires de l'abonné :", marginLeft, y);
+y += 20;
 
-// Zone commentaire abonné (fond gris clair)
-const commentBoxHeight = 100;
+// Zone commentaire abonné
+const commentBoxHeight = 180;
 ctx.fillStyle = "#f5f5f5";
-ctx.fillRect(90, y - 20, 1060, commentBoxHeight);
-ctx.strokeStyle = "#ddd";
-ctx.lineWidth = 1;
-ctx.strokeRect(90, y - 20, 1060, commentBoxHeight);
+ctx.fillRect(marginLeft, y, contentWidth, commentBoxHeight);
+ctx.strokeStyle = "#cccccc";
+ctx.lineWidth = 2;
+ctx.strokeRect(marginLeft, y, contentWidth, commentBoxHeight);
 
 if (cmtAbo) {
-  ctx.fillStyle = "#000";
-  ctx.font = "15px Arial";
-  wrapText(ctx, cmtAbo, 100, y, 1040, 22);
+  ctx.fillStyle = "#000000";
+  ctx.font = "26px Arial";
+  wrapText(ctx, cmtAbo, marginLeft + 20, y + 40, contentWidth - 40, 38);
 }
+y += commentBoxHeight + 50;
 
-y += commentBoxHeight + 25;
-
-ctx.font = "18px Arial";
-ctx.fillStyle = "#000";
-ctx.fillText("Commentaires de l'intervenant :", 90, y);
-y += 30;
+ctx.font = "32px Arial";
+ctx.fillStyle = "#000000";
+ctx.fillText("Commentaires de l'intervenant :", marginLeft, y);
+y += 20;
 
 // Zone commentaire technicien
 ctx.fillStyle = "#f5f5f5";
-ctx.fillRect(90, y - 20, 1060, commentBoxHeight);
-ctx.strokeStyle = "#ddd";
-ctx.lineWidth = 1;
-ctx.strokeRect(90, y - 20, 1060, commentBoxHeight);
+ctx.fillRect(marginLeft, y, contentWidth, commentBoxHeight);
+ctx.strokeStyle = "#cccccc";
+ctx.lineWidth = 2;
+ctx.strokeRect(marginLeft, y, contentWidth, commentBoxHeight);
 
 if (cmtTech) {
-  ctx.fillStyle = "#000";
-  ctx.font = "15px Arial";
-  wrapText(ctx, cmtTech, 100, y, 1040, 22);
+  ctx.fillStyle = "#000000";
+  ctx.font = "26px Arial";
+  wrapText(ctx, cmtTech, marginLeft + 20, y + 40, contentWidth - 40, 38);
 }
-
-y += commentBoxHeight + 50;
+y += commentBoxHeight + 80;
 
 /* ══════════════════════════════════════════════════════════════════
    SIGNATURE ET DATE
@@ -994,34 +1049,36 @@ y += commentBoxHeight + 50;
 const ville = document.getElementById("r_ville").value || "";
 const date = new Date().toLocaleDateString("fr-FR");
 
-ctx.font = "18px Arial";
-ctx.fillStyle = "#000";
-ctx.fillText("A", 90, y);
-ctx.fillText(ville, 140, y);
-ctx.fillText(", le " + date, 140 + ctx.measureText(ville).width + 10, y);
-
+ctx.font = "32px Arial";
+ctx.fillStyle = "#000000";
+const dateText = "A " + (ville || "_______") + ", le " + date;
+ctx.fillText(dateText, marginLeft, y);
 y += 10;
 
-ctx.font = "italic 16px Arial";
-ctx.fillStyle = "#666";
+ctx.font = "italic 28px Arial";
+ctx.fillStyle = "#666666";
 ctx.textAlign = "right";
-ctx.fillText("Signature * (précédée de la mention « lu et approuvé »)", 1150, y);
+ctx.fillText("Signature * (précédée de la mention « lu et approuvé »)", canvas.width - marginRight, y);
 ctx.textAlign = "left";
+y += 20;
 
-// Signature
-const sig = document.getElementById("sig-canvas");
-const sigHeight = 120;
-const sigWidth = 250;
-const sigX = 1150 - sigWidth;
-const sigY = y + 10;
-
-ctx.drawImage(sig, sigX, sigY, sigWidth, sigHeight);
+// Signature - correction du ratio
+const sigCanvas = document.getElementById("sig-canvas");
+if (sigCanvas) {
+  const sigWidth = 500;
+  const sigHeight = 200;
+  const sigX = canvas.width - marginRight - sigWidth;
+  const sigY = y;
+  
+  // Dessiner le canvas de signature avec les bonnes dimensions
+  ctx.drawImage(sigCanvas, 0, 0, sigCanvas.width, sigCanvas.height, sigX, sigY, sigWidth, sigHeight);
+}
 
 /* ══════════════════════════════════════════════════════════════════
-   APERÇU ET AFFICHAGE
+   APERÇU
    ══════════════════════════════════════════════════════════════════ */
 
-document.getElementById("apercu-refus").src = canvas.toDataURL();
+document.getElementById("apercu-refus").src = canvas.toDataURL("image/png");
 showPage("refus-apercu");
 
 }
@@ -1039,6 +1096,8 @@ a.href = img;
 a.download = "constat_refus_fibre.png";
 
 a.click();
+
+showToast("✓ Image enregistrée");
 
 }
 
