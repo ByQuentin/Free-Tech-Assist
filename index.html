@@ -388,6 +388,7 @@ function showPage(id) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (id === "index") document.querySelectorAll(".tab")[0].classList.add("active");
   if (id === "form" || id === "apercu") document.getElementById("tab-travaux").classList.add("active");
+  if (id === "refus-form" || id === "refus-apercu") document.getElementById("tab-refus").classList.add("active");
   window.scrollTo(0,0);
 }
 
@@ -487,7 +488,7 @@ function _doGenerate() {
         ctx.font = "30px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        const lines = wrapText(ctx, text, TOP_W - 120);
+        const lines = wrapTextLines(ctx, text, TOP_W - 120);
         lines.forEach((line, i) => ctx.fillText(line, TOP_W/2, sy + 50 + i * 46));
         ctx.textAlign = "left";
       } else {
@@ -550,7 +551,7 @@ function drawCheck(ctx, cx, cy, size) {
   ctx.stroke();
 }
 
-function wrapText(ctx, text, maxW) {
+function wrapTextLines(ctx, text, maxW) {
   const result = [];
   text.split("\n").forEach(para => {
     const words = para.split(" ");
@@ -698,6 +699,573 @@ function showToast(msg) {
   </div>
   <img id="apercu-refus" style="width:100%;display:block;border:1px solid #ccc;background:#fff;border-radius:4px;" alt="Aperçu constat refus">
 </div>
+<script>
+
+function genererRefus(){
+
+const canvas = document.createElement("canvas");
+canvas.width = 1240;
+canvas.height = 1754;
+
+const ctx = canvas.getContext("2d");
+
+/* fond blanc */
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+/* ══════════════════════════════════════════════════════════════════
+   LOGO FREE + TITRE
+   ══════════════════════════════════════════════════════════════════ */
+
+// Logo "free" en rouge (italique stylisé)
+ctx.fillStyle = "#c8102e";
+ctx.font = "italic bold 72px Arial";
+ctx.fillText("free", 90, 100);
+
+// Ligne horizontale sous le logo
+ctx.strokeStyle = "#ddd";
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(90, 130);
+ctx.lineTo(1150, 130);
+ctx.stroke();
+
+// Titre principal
+ctx.fillStyle = "#000";
+ctx.font = "bold 32px Arial";
+ctx.textAlign = "center";
+ctx.fillText("CONSTAT DE REFUS D'INSTALLATION DE LA FIBRE OPTIQUE", 620, 190);
+ctx.textAlign = "left";
+
+let y = 250;
+
+/* ══════════════════════════════════════════════════════════════════
+   INFORMATIONS RELATIVES À L'INTERVENTION
+   ══════════════════════════════════════════════════════════════════ */
+
+// Section title
+ctx.fillStyle = "#000";
+ctx.font = "bold 22px Arial";
+ctx.fillText("Informations relatives à l'intervention", 90, y);
+y += 10;
+
+// Ligne sous le titre
+ctx.strokeStyle = "#333";
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(90, y);
+ctx.lineTo(1150, y);
+ctx.stroke();
+y += 30;
+
+// Récupération des données
+const nomTech = document.getElementById("r_nom_tech").value || "";
+const dateInterv = document.getElementById("r_date").value || "";
+const heureInterv = document.getElementById("r_heure").value || "";
+const lieuInterv = document.getElementById("r_lieu").value || "";
+const idc = document.getElementById("r_idc").value || "";
+const commande = document.getElementById("r_commande").value || "";
+
+// Affichage des infos
+ctx.font = "18px Arial";
+ctx.fillStyle = "#666";
+ctx.fillText("Nom, Prénom de l'intervenant :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(nomTech, 420, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Date de l'intervention", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(dateInterv, 420, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Heure de l'intervention :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(heureInterv, 420, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Lieu de l'intervention", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(lieuInterv, 420, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Numéro abonné IDC :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(idc, 420, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Numéro de commande", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(commande, 420, y);
+y += 45;
+
+/* ══════════════════════════════════════════════════════════════════
+   INFORMATIONS RELATIVES À L'ABONNÉ
+   ══════════════════════════════════════════════════════════════════ */
+
+ctx.fillStyle = "#000";
+ctx.font = "bold 22px Arial";
+ctx.fillText("Informations relatives à l'abonné", 90, y);
+ctx.font = "italic 16px Arial";
+ctx.fillStyle = "#666";
+ctx.fillText("(ou son représentant)", 480, y);
+y += 10;
+
+ctx.strokeStyle = "#333";
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(90, y);
+ctx.lineTo(1150, y);
+ctx.stroke();
+y += 30;
+
+// Récupération civilité
+const civilite = document.getElementById("r_mme").checked ? "Mme" : 
+                 document.getElementById("r_mr").checked ? "Mr" : "";
+
+const nomAbo = document.getElementById("r_nom_abo").value || "";
+const prenomAbo = document.getElementById("r_prenom_abo").value || "";
+const emailAbo = document.getElementById("r_email_abo").value || "";
+const telAbo = document.getElementById("r_tel_abo").value || "";
+
+ctx.font = "18px Arial";
+ctx.fillStyle = "#000";
+ctx.fillText("Je soussigné(e) : ", 90, y);
+
+// Checkboxes civilité
+const boxSize = 18;
+const boxX1 = 260;
+const boxX2 = 340;
+
+// Checkbox Mme
+ctx.strokeStyle = "#666";
+ctx.lineWidth = 1.5;
+ctx.strokeRect(boxX1, y - boxSize + 4, boxSize, boxSize);
+if (civilite === "Mme") {
+  ctx.fillStyle = "#c8102e";
+  ctx.fillRect(boxX1 + 3, y - boxSize + 7, boxSize - 6, boxSize - 6);
+}
+ctx.fillStyle = "#000";
+ctx.fillText("Mme", boxX1 + boxSize + 8, y);
+
+// Checkbox Mr
+ctx.strokeRect(boxX2, y - boxSize + 4, boxSize, boxSize);
+if (civilite === "Mr") {
+  ctx.fillStyle = "#c8102e";
+  ctx.fillRect(boxX2 + 3, y - boxSize + 7, boxSize - 6, boxSize - 6);
+}
+ctx.fillStyle = "#000";
+ctx.fillText("Mr", boxX2 + boxSize + 8, y);
+
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("NOM:", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(nomAbo.toUpperCase(), 160, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("Prénom :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(prenomAbo, 180, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("E-mail :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(emailAbo, 180, y);
+y += 35;
+
+ctx.fillStyle = "#666";
+ctx.fillText("N° de téléphone :", 90, y);
+ctx.fillStyle = "#000";
+ctx.fillText(telAbo, 260, y);
+y += 50;
+
+/* ══════════════════════════════════════════════════════════════════
+   DÉCLARATION DE REFUS
+   ══════════════════════════════════════════════════════════════════ */
+
+ctx.font = "17px Arial";
+ctx.fillStyle = "#000";
+const declarationText = "Je déclare refuser l'installation de la fibre optique initialement prévue dans mon local, et demander à";
+ctx.fillText(declarationText, 90, y);
+y += 24;
+ctx.fillText("passer / rester (rayer la mention inutile) en ADSL pour les raisons suivantes :", 90, y);
+y += 40;
+
+// Liste des raisons
+let raisons = [];
+
+if(document.getElementById("rcb_syndic").checked)
+  raisons.push("Le Syndic refuse l'appareil dans les parties communes");
+
+if(document.getElementById("rcb_local").checked)
+  raisons.push("Je refuse l'appareil dans mon local ;");
+
+if(document.getElementById("rcb_travaux").checked)
+  raisons.push("Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux ;");
+
+if(document.getElementById("rcb_proprio").checked)
+  raisons.push("Le propriétaire refuse tous travaux dans le local ;");
+
+if(document.getElementById("rcb_adsl").checked)
+  raisons.push("Je suis satisfait de l'ADSL et ne veux pas la fibre ;");
+
+if(document.getElementById("rcb_delai").checked)
+  raisons.push("Délai des travaux supérieur à 45 jours.");
+
+// Affichage des raisons avec checkboxes
+ctx.font = "16px Arial";
+raisons.forEach(raison => {
+  // Checkbox cochée
+  ctx.strokeStyle = "#666";
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(110, y - boxSize + 4, boxSize, boxSize);
+  ctx.fillStyle = "#c8102e";
+  ctx.fillRect(113, y - boxSize + 7, boxSize - 6, boxSize - 6);
+  
+  // Texte
+  ctx.fillStyle = "#000";
+  ctx.fillText(raison, 140, y);
+  y += 28;
+});
+
+y += 15;
+
+/* ══════════════════════════════════════════════════════════════════
+   COMMENTAIRES
+   ══════════════════════════════════════════════════════════════════ */
+
+const cmtAbo = document.getElementById("r_cmt_abo").value || "";
+const cmtTech = document.getElementById("r_cmt_tech").value || "";
+
+ctx.font = "18px Arial";
+ctx.fillStyle = "#000";
+ctx.fillText("Commentaires de l'abonné :", 90, y);
+y += 30;
+
+// Zone commentaire abonné (fond gris clair)
+const commentBoxHeight = 100;
+ctx.fillStyle = "#f5f5f5";
+ctx.fillRect(90, y - 20, 1060, commentBoxHeight);
+ctx.strokeStyle = "#ddd";
+ctx.lineWidth = 1;
+ctx.strokeRect(90, y - 20, 1060, commentBoxHeight);
+
+if (cmtAbo) {
+  ctx.fillStyle = "#000";
+  ctx.font = "15px Arial";
+  wrapText(ctx, cmtAbo, 100, y, 1040, 22);
+}
+
+y += commentBoxHeight + 25;
+
+ctx.font = "18px Arial";
+ctx.fillStyle = "#000";
+ctx.fillText("Commentaires de l'intervenant :", 90, y);
+y += 30;
+
+// Zone commentaire technicien
+ctx.fillStyle = "#f5f5f5";
+ctx.fillRect(90, y - 20, 1060, commentBoxHeight);
+ctx.strokeStyle = "#ddd";
+ctx.lineWidth = 1;
+ctx.strokeRect(90, y - 20, 1060, commentBoxHeight);
+
+if (cmtTech) {
+  ctx.fillStyle = "#000";
+  ctx.font = "15px Arial";
+  wrapText(ctx, cmtTech, 100, y, 1040, 22);
+}
+
+y += commentBoxHeight + 50;
+
+/* ══════════════════════════════════════════════════════════════════
+   SIGNATURE ET DATE
+   ══════════════════════════════════════════════════════════════════ */
+
+const ville = document.getElementById("r_ville").value || "";
+const date = new Date().toLocaleDateString("fr-FR");
+
+ctx.font = "18px Arial";
+ctx.fillStyle = "#000";
+ctx.fillText("A", 90, y);
+ctx.fillText(ville, 140, y);
+ctx.fillText(", le " + date, 140 + ctx.measureText(ville).width + 10, y);
+
+y += 10;
+
+ctx.font = "italic 16px Arial";
+ctx.fillStyle = "#666";
+ctx.textAlign = "right";
+ctx.fillText("Signature * (précédée de la mention « lu et approuvé »)", 1150, y);
+ctx.textAlign = "left";
+
+// Signature
+const sig = document.getElementById("sig-canvas");
+const sigHeight = 120;
+const sigWidth = 250;
+const sigX = 1150 - sigWidth;
+const sigY = y + 10;
+
+ctx.drawImage(sig, sigX, sigY, sigWidth, sigHeight);
+
+/* ══════════════════════════════════════════════════════════════════
+   APERÇU ET AFFICHAGE
+   ══════════════════════════════════════════════════════════════════ */
+
+document.getElementById("apercu-refus").src = canvas.toDataURL();
+showPage("refus-apercu");
+
+}
+
+
+/* téléchargement */
+
+function telechargerRefus(){
+
+const img = document.getElementById("apercu-refus").src;
+
+const a = document.createElement("a");
+
+a.href = img;
+a.download = "constat_refus_fibre.png";
+
+a.click();
+
+}
+
+
+/* gestion texte long */
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+
+const words = text.split(' ');
+let line = '';
+
+for(let n = 0; n < words.length; n++) {
+
+const testLine = line + words[n] + ' ';
+const metrics = ctx.measureText(testLine);
+const testWidth = metrics.width;
+
+if (testWidth > maxWidth && n > 0) {
+ctx.fillText(line, x, y);
+line = words[n] + ' ';
+y += lineHeight;
+}
+
+else {
+line = testLine;
+}
+
+}
+
+ctx.fillText(line, x, y);
+
+}
+
+
+// ══════════════════════════════════════════════════════════════════
+// EVENT LISTENERS POUR LE FORMULAIRE DE REFUS
+// ══════════════════════════════════════════════════════════════════
+
+// Gestion des checkboxes du formulaire de refus
+const refusCheckboxes = ['syndic', 'local', 'travaux', 'proprio', 'adsl', 'delai'];
+
+refusCheckboxes.forEach(name => {
+  const row = document.getElementById('rrow_' + name);
+  if (!row) return;
+  
+  let touchStartY = 0, touchStartX = 0, moved = false;
+
+  row.addEventListener("touchstart", function(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+    moved = false;
+  });
+
+  row.addEventListener("touchmove", function(e) {
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+    if (deltaY > 8 || deltaX > 8) moved = true;
+  });
+
+  row.addEventListener("touchend", function(e) {
+    if (!moved) {
+      e.preventDefault();
+      toggleRefus(row);
+    }
+  });
+
+  row.addEventListener("click", function(e) {
+    if (!('ontouchstart' in window)) toggleRefus(row);
+  });
+});
+
+function toggleRefus(row) {
+  const input = row.querySelector("input[type=checkbox]");
+  const vis = row.querySelector(".cb-custom");
+  input.checked = !input.checked;
+  vis.classList.toggle("on", input.checked);
+}
+
+// Gestion des boutons radio civilité (Mme/Mr)
+['mme', 'mr'].forEach(civ => {
+  const label = document.getElementById('rciv_' + civ);
+  if (!label) return;
+  
+  let touchStartY = 0, touchStartX = 0, moved = false;
+
+  label.addEventListener("touchstart", function(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+    moved = false;
+  });
+
+  label.addEventListener("touchmove", function(e) {
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+    if (deltaY > 8 || deltaX > 8) moved = true;
+  });
+
+  label.addEventListener("touchend", function(e) {
+    if (!moved) {
+      e.preventDefault();
+      selectCivilite(civ);
+    }
+  });
+
+  label.addEventListener("click", function(e) {
+    if (!('ontouchstart' in window)) selectCivilite(civ);
+  });
+});
+
+function selectCivilite(civ) {
+  // Décocher tous
+  ['mme', 'mr'].forEach(c => {
+    document.getElementById('r_' + c).checked = false;
+    document.getElementById('rciv_' + c).style.borderColor = '#ddd';
+    document.getElementById('rcbv_' + c).classList.remove('on');
+  });
+  
+  // Cocher celui sélectionné
+  document.getElementById('r_' + civ).checked = true;
+  document.getElementById('rciv_' + civ).style.borderColor = 'var(--rouge)';
+  document.getElementById('rcbv_' + civ).classList.add('on');
+}
+
+
+// ══════════════════════════════════════════════════════════════════
+// SYSTÈME DE DESSIN SUR LE CANVAS DE SIGNATURE
+// ══════════════════════════════════════════════════════════════════
+
+const sigCanvas = document.getElementById('sig-canvas');
+const sigCtx = sigCanvas.getContext('2d');
+let drawing = false;
+let lastX = 0;
+let lastY = 0;
+
+// Ajuster la taille du canvas
+function resizeSigCanvas() {
+  const rect = sigCanvas.getBoundingClientRect();
+  sigCanvas.width = rect.width * 2; // Retina
+  sigCanvas.height = 160 * 2;
+  sigCtx.scale(2, 2);
+  sigCtx.lineCap = 'round';
+  sigCtx.lineJoin = 'round';
+  sigCtx.strokeStyle = '#111';
+  sigCtx.lineWidth = 2;
+}
+
+resizeSigCanvas();
+window.addEventListener('resize', resizeSigCanvas);
+
+// Touch events
+sigCanvas.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const rect = sigCanvas.getBoundingClientRect();
+  lastX = e.touches[0].clientX - rect.left;
+  lastY = e.touches[0].clientY - rect.top;
+  drawing = true;
+  
+  // Cacher le hint
+  const hint = document.querySelector('.sig-hint');
+  if (hint) hint.style.display = 'none';
+});
+
+sigCanvas.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  if (!drawing) return;
+  
+  const rect = sigCanvas.getBoundingClientRect();
+  const x = e.touches[0].clientX - rect.left;
+  const y = e.touches[0].clientY - rect.top;
+  
+  sigCtx.beginPath();
+  sigCtx.moveTo(lastX, lastY);
+  sigCtx.lineTo(x, y);
+  sigCtx.stroke();
+  
+  lastX = x;
+  lastY = y;
+});
+
+sigCanvas.addEventListener('touchend', function(e) {
+  e.preventDefault();
+  drawing = false;
+});
+
+// Mouse events (pour desktop)
+sigCanvas.addEventListener('mousedown', function(e) {
+  const rect = sigCanvas.getBoundingClientRect();
+  lastX = e.clientX - rect.left;
+  lastY = e.clientY - rect.top;
+  drawing = true;
+  
+  const hint = document.querySelector('.sig-hint');
+  if (hint) hint.style.display = 'none';
+});
+
+sigCanvas.addEventListener('mousemove', function(e) {
+  if (!drawing) return;
+  
+  const rect = sigCanvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  sigCtx.beginPath();
+  sigCtx.moveTo(lastX, lastY);
+  sigCtx.lineTo(x, y);
+  sigCtx.stroke();
+  
+  lastX = x;
+  lastY = y;
+});
+
+sigCanvas.addEventListener('mouseup', function() {
+  drawing = false;
+});
+
+sigCanvas.addEventListener('mouseleave', function() {
+  drawing = false;
+});
+
+// Fonction pour effacer la signature
+function clearSig() {
+  sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+  const hint = document.querySelector('.sig-hint');
+  if (hint) hint.style.display = 'block';
+}
+
+</script>
 
 </body>
 </html>
