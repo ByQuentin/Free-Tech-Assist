@@ -173,6 +173,15 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
 .spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;}
 .spinner-label{color:#fff;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MODULE 2 REFUS ── */
+.sig-wrap{border:2px solid #ccc;border-radius:4px;background:#fff;position:relative;touch-action:none;}
+.sig-canvas{display:block;width:100%;cursor:crosshair;touch-action:none;}
+.sig-clear{position:absolute;top:6px;right:8px;background:#fff;border:1px solid #ccc;border-radius:3px;font-size:11px;font-weight:700;padding:4px 10px;cursor:pointer;color:#666;-webkit-tap-highlight-color:transparent;}
+.sig-hint{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:11px;color:#ccc;padding:6px;pointer-events:none;}
+.sig-wrap.has-sig .sig-hint{display:none;}
+.group-subtitle{font-size:10px;font-weight:700;color:#888;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px 0;}
+
 </style>
 </head>
 <body>
@@ -196,8 +205,8 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
     <button class="tab active" id="tab-travaux" onclick="showPage('form')">
       📋 Fiche Travaux
     </button>
-    <button class="tab off" id="tab-refus">
-      🚫 Refus <span class="tab-badge">bientôt</span>
+    <button class="tab" id="tab-refus" onclick="showPage('refus-form')">
+      🚫 Refus
     </button>
   </div>
 </div>
@@ -241,18 +250,18 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
     </div>
 
     <!-- Module 2 -->
-    <div class="module-card soon">
-      <div class="module-card-stripe gray"></div>
+    <div class="module-card available" onclick="showPage('refus-form')">
+      <div class="module-card-stripe red"></div>
       <div class="module-card-body">
         <div class="module-card-top">
-          <div class="module-card-icon gray">🚫</div>
+          <div class="module-card-icon red">🚫</div>
           <div>
             <div class="module-card-num">Module 2</div>
             <div class="module-card-title">Fiche Refus Travaux</div>
           </div>
         </div>
         <div class="module-card-desc">Génère une fiche de refus d'intervention à remettre au client avec les motifs de blocage.</div>
-        <span class="module-status soon">En cours de développement</span>
+        <span class="module-status ready">✓ Disponible</span>
       </div>
       <div class="module-card-arrow">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
@@ -571,5 +580,124 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 </script>
+
+<!-- PAGE REFUS FORM -->
+<div class="page" id="page-refus-form">
+
+  <!-- INTERVENANT -->
+  <div class="group">
+    <div class="group-title">Informations intervenant</div>
+    <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
+      <div>
+        <div class="group-subtitle" style="padding:0 0 4px;">Nom &amp; Prénom du technicien</div>
+        <input id="r_nom_tech" type="text" placeholder="Prénom NOM" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <div class="group-subtitle" style="padding:0 0 4px;">Date</div>
+          <input id="r_date" type="date" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 8px;font-family:inherit;font-size:13px;color:#111;background:#f9f9f9;outline:none;">
+        </div>
+        <div>
+          <div class="group-subtitle" style="padding:0 0 4px;">Heure</div>
+          <input id="r_heure" type="time" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 8px;font-family:inherit;font-size:13px;color:#111;background:#f9f9f9;outline:none;">
+        </div>
+      </div>
+      <div>
+        <div class="group-subtitle" style="padding:0 0 4px;">Lieu de l'intervention</div>
+        <input id="r_lieu" type="text" placeholder="Adresse, ville…" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <div class="group-subtitle" style="padding:0 0 4px;">N° abonné IDC</div>
+          <input id="r_idc" type="text" placeholder="IDC…" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 8px;font-family:inherit;font-size:13px;color:#111;background:#f9f9f9;outline:none;">
+        </div>
+        <div>
+          <div class="group-subtitle" style="padding:0 0 4px;">N° de commande</div>
+          <input id="r_commande" type="text" placeholder="Commande…" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 8px;font-family:inherit;font-size:13px;color:#111;background:#f9f9f9;outline:none;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABONNÉ -->
+  <div class="group">
+    <div class="group-title">Informations abonné</div>
+    <div style="padding:12px 14px 4px;display:flex;flex-direction:column;gap:10px;">
+      <!-- Civilité -->
+      <div style="display:flex;gap:10px;">
+        <label id="rciv_mme" style="flex:1;display:flex;align-items:center;gap:8px;padding:11px 14px;border:2px solid #ddd;border-radius:4px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;">
+          <span class="cb-custom" id="rcbv_mme"></span><span style="font-size:14px;font-weight:600;">Mme</span>
+          <input type="radio" name="r_civ" id="r_mme" value="mme" style="display:none">
+        </label>
+        <label id="rciv_mr" style="flex:1;display:flex;align-items:center;gap:8px;padding:11px 14px;border:2px solid #ddd;border-radius:4px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;">
+          <span class="cb-custom" id="rcbv_mr"></span><span style="font-size:14px;font-weight:600;">Mr</span>
+          <input type="radio" name="r_civ" id="r_mr" value="mr" style="display:none">
+        </label>
+      </div>
+      <input id="r_nom_abo" type="text" placeholder="NOM" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;text-transform:uppercase;">
+      <input id="r_prenom_abo" type="text" placeholder="Prénom" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;">
+      <input id="r_email_abo" type="email" placeholder="E-mail" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;">
+      <input id="r_tel_abo" type="tel" placeholder="N° de téléphone" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;margin-bottom:4px;">
+    </div>
+  </div>
+
+  <!-- RAISONS -->
+  <div class="group">
+    <div class="group-title">Motifs de refus</div>
+    <label class="cb-row" id="rrow_syndic"><span class="cb-custom" id="rcbv_syndic"></span><span class="cb-label">Le Syndic refuse l'appareil dans les parties communes</span><input type="checkbox" id="rcb_syndic" style="display:none"></label>
+    <label class="cb-row" id="rrow_local"><span class="cb-custom" id="rcbv_local"></span><span class="cb-label">Je refuse l'appareil dans mon local</span><input type="checkbox" id="rcb_local" style="display:none"></label>
+    <label class="cb-row" id="rrow_travaux"><span class="cb-custom" id="rcbv_travaux"></span><span class="cb-label">Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux</span><input type="checkbox" id="rcb_travaux" style="display:none"></label>
+    <label class="cb-row" id="rrow_proprio"><span class="cb-custom" id="rcbv_proprio"></span><span class="cb-label">Le propriétaire refuse tous travaux dans le local</span><input type="checkbox" id="rcb_proprio" style="display:none"></label>
+    <label class="cb-row" id="rrow_adsl"><span class="cb-custom" id="rcbv_adsl"></span><span class="cb-label">Je suis satisfait de l'ADSL et ne veux pas la fibre</span><input type="checkbox" id="rcb_adsl" style="display:none"></label>
+    <label class="cb-row" id="rrow_delai"><span class="cb-custom" id="rcbv_delai"></span><span class="cb-label">Délai des travaux supérieur à 45 jours</span><input type="checkbox" id="rcb_delai" style="display:none"></label>
+  </div>
+
+  <!-- COMMENTAIRES -->
+  <div class="group">
+    <div class="group-title">Commentaires abonné</div>
+    <textarea id="r_cmt_abo" placeholder="Commentaires de l'abonné…" style="display:block;width:100%;min-height:90px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;line-height:1.6;color:#111;padding:12px 14px;"></textarea>
+  </div>
+  <div class="group">
+    <div class="group-title">Commentaires intervenant</div>
+    <textarea id="r_cmt_tech" placeholder="Commentaires du technicien…" style="display:block;width:100%;min-height:90px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;line-height:1.6;color:#111;padding:12px 14px;"></textarea>
+  </div>
+
+  <!-- VILLE + SIGNATURE -->
+  <div class="group">
+    <div class="group-title">Lieu &amp; Signature</div>
+    <div style="padding:12px 14px;display:flex;flex-direction:column;gap:12px;">
+      <input id="r_ville" type="text" placeholder="Ville (pour le « A ___ »)" style="width:100%;border:1.5px solid #ddd;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111;background:#f9f9f9;outline:none;">
+      <div>
+        <div class="group-subtitle" style="padding:0 0 6px;">Signature du client — « lu et approuvé »</div>
+        <div class="sig-wrap" id="sig-wrap">
+          <canvas id="sig-canvas" class="sig-canvas" height="160"></canvas>
+          <button class="sig-clear" ontouchstart="" onclick="clearSig()">✕ Effacer</button>
+          <div class="sig-hint">Signez ici avec le doigt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generer" onclick="genererRefus()">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    Générer le constat de refus
+  </button>
+</div>
+
+<!-- PAGE REFUS APERÇU -->
+<div class="page" id="page-refus-apercu">
+  <div class="apercu-actions">
+    <button class="btn-dl btn-dl-back" onclick="showPage('refus-form')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Modifier
+    </button>
+    <button class="btn-dl btn-dl-save" onclick="telechargerRefus()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Enregistrer l'image
+    </button>
+  </div>
+  <img id="apercu-refus" style="width:100%;display:block;border:1px solid #ccc;background:#fff;border-radius:4px;" alt="Aperçu constat refus">
+</div>
+
 </body>
 </html>
