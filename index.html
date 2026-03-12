@@ -175,7 +175,7 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── MODULE 2 REFUS ── */
-.sig-wrap{border:2px solid #ccc;border-radius:4px;background:#fff;position:relative;touch-action:none;}
+.sig-wrap{border:2px solid #ccc;border-radius:4px;background:#fff;position:relative;}
 .sig-canvas{display:block;width:100%;cursor:crosshair;touch-action:none;}
 .sig-clear{position:absolute;top:6px;right:8px;background:#fff;border:1px solid #ccc;border-radius:3px;font-size:11px;font-weight:700;padding:4px 10px;cursor:pointer;color:#666;-webkit-tap-highlight-color:transparent;}
 .sig-hint{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:11px;color:#ccc;padding:6px;pointer-events:none;}
@@ -389,6 +389,14 @@ function showPage(id) {
   if (id === "index") document.querySelectorAll(".tab")[0].classList.add("active");
   if (id === "form" || id === "apercu") document.getElementById("tab-travaux").classList.add("active");
   if (id === "refus-form" || id === "refus-apercu") document.getElementById("tab-refus").classList.add("active");
+  
+  // Réinitialiser la signature quand on affiche la page refus-form
+  if (id === "refus-form") {
+    setTimeout(() => {
+      initSignature();
+    }, 100);
+  }
+  
   window.scrollTo(0,0);
 }
 
@@ -590,6 +598,7 @@ const FICHE_REFUS_BASE64 = "data:image/jpeg;base64,/9j/4QDlRXhpZgAATU0AKgAAAAgAB
 
 let generatedRefusDataURL = null;
 let sigCanvas, sigCtx, isSignatureDrawing = false;
+let sigHandlers = null; // Stocker les handlers pour pouvoir les retirer
 
 // Initialiser le canvas de signature
 function initSignature() {
@@ -611,6 +620,18 @@ function initSignature() {
     return;
   }
   
+  // Retirer les anciens handlers s'ils existent
+  if (sigHandlers) {
+    sigCanvas.removeEventListener("touchstart", sigHandlers.touchstart, {capture: true});
+    sigCanvas.removeEventListener("touchmove", sigHandlers.touchmove, {capture: true});
+    sigCanvas.removeEventListener("touchend", sigHandlers.touchend, {capture: true});
+    sigCanvas.removeEventListener("touchcancel", sigHandlers.touchcancel, {capture: true});
+    sigCanvas.removeEventListener("mousedown", sigHandlers.mousedown);
+    sigCanvas.removeEventListener("mousemove", sigHandlers.mousemove);
+    sigCanvas.removeEventListener("mouseup", sigHandlers.mouseup);
+    sigCanvas.removeEventListener("mouseleave", sigHandlers.mouseleave);
+  }
+  
   // Adapter la taille du canvas
   const resizeSigCanvas = () => {
     // Sauvegarder le contenu actuel du canvas
@@ -618,7 +639,9 @@ function initSignature() {
     tempCanvas.width = sigCanvas.width;
     tempCanvas.height = sigCanvas.height;
     const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(sigCanvas, 0, 0);
+    if (tempCtx && isSignatureDrawing) {
+      tempCtx.drawImage(sigCanvas, 0, 0);
+    }
     
     // Redimensionner
     const rect = wrap.getBoundingClientRect();
@@ -630,12 +653,11 @@ function initSignature() {
     sigCtx.lineJoin = "round";
     
     // Restaurer le contenu
-    if (isSignatureDrawing) {
+    if (isSignatureDrawing && tempCtx) {
       sigCtx.drawImage(tempCanvas, 0, 0);
     }
   };
   resizeSigCanvas();
-  window.addEventListener("resize", resizeSigCanvas);
 
   // Événements tactiles et souris
   let drawing = false;
@@ -652,39 +674,61 @@ function initSignature() {
 
   function startDrawing(e) {
     e.preventDefault();
+    e.stopPropagation();
     drawing = true;
     isSignatureDrawing = true;
+    wrap.classList.add("has-sig");
     const pos = getPos(e);
     lastX = pos.x;
     lastY = pos.y;
+    
+    // Commencer un nouveau chemin
+    sigCtx.beginPath();
+    sigCtx.moveTo(lastX, lastY);
   }
 
   function draw(e) {
     if (!drawing) return;
     e.preventDefault();
+    e.stopPropagation();
     const pos = getPos(e);
-    sigCtx.beginPath();
-    sigCtx.moveTo(lastX, lastY);
     sigCtx.lineTo(pos.x, pos.y);
     sigCtx.stroke();
     lastX = pos.x;
     lastY = pos.y;
   }
 
-  function stopDrawing() {
+  function stopDrawing(e) {
+    if (drawing) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     drawing = false;
   }
 
-  // Touch events
-  sigCanvas.addEventListener("touchstart", startDrawing, {passive: false});
-  sigCanvas.addEventListener("touchmove", draw, {passive: false});
-  sigCanvas.addEventListener("touchend", stopDrawing);
+  // Stocker les handlers
+  sigHandlers = {
+    touchstart: startDrawing,
+    touchmove: draw,
+    touchend: stopDrawing,
+    touchcancel: stopDrawing,
+    mousedown: startDrawing,
+    mousemove: draw,
+    mouseup: stopDrawing,
+    mouseleave: stopDrawing
+  };
+
+  // Touch events - capturer sur le canvas directement
+  sigCanvas.addEventListener("touchstart", sigHandlers.touchstart, {passive: false, capture: true});
+  sigCanvas.addEventListener("touchmove", sigHandlers.touchmove, {passive: false, capture: true});
+  sigCanvas.addEventListener("touchend", sigHandlers.touchend, {passive: false, capture: true});
+  sigCanvas.addEventListener("touchcancel", sigHandlers.touchcancel, {passive: false, capture: true});
   
   // Mouse events
-  sigCanvas.addEventListener("mousedown", startDrawing);
-  sigCanvas.addEventListener("mousemove", draw);
-  sigCanvas.addEventListener("mouseup", stopDrawing);
-  sigCanvas.addEventListener("mouseleave", stopDrawing);
+  sigCanvas.addEventListener("mousedown", sigHandlers.mousedown);
+  sigCanvas.addEventListener("mousemove", sigHandlers.mousemove);
+  sigCanvas.addEventListener("mouseup", sigHandlers.mouseup);
+  sigCanvas.addEventListener("mouseleave", sigHandlers.mouseleave);
 }
 
 function clearSig() {
@@ -694,6 +738,10 @@ function clearSig() {
   }
   sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
   isSignatureDrawing = false;
+  const wrap = document.getElementById("sig-wrap");
+  if (wrap) {
+    wrap.classList.remove("has-sig");
+  }
 }
 
 // Gestion des cases à cocher de civilité
@@ -841,19 +889,19 @@ async function genererRefus() {
   ctx.fillText(nomTech, 410, 225);
 
   // Date de l'intervention
-  ctx.fillText(dateFormatted, 270, 272);
+  ctx.fillText(dateFormatted, 480, 272);
 
   // Heure de l'intervention
-  ctx.fillText(heure, 270, 312);
+  ctx.fillText(heure, 480, 312);
 
   // Lieu de l'intervention
-  ctx.fillText(lieu, 270, 355);
+  ctx.fillText(lieu, 480, 355);
 
   // Numéro abonné IDC
-  ctx.fillText(idc, 270, 390);
+  ctx.fillText(idc, 480, 390);
 
   // Numéro de commande
-  ctx.fillText(commande, 270, 432);
+  ctx.fillText(commande, 480, 432);
 
   // Checkbox civilité Mme (position x: 205, y: 497)
   if (civMme) {
@@ -869,35 +917,35 @@ async function genererRefus() {
 
   // NOM
   ctx.font = "16px Arial";
-  ctx.fillText(nomAbo.toUpperCase(), 270, 520);
+  ctx.fillText(nomAbo.toUpperCase(), 480, 520);
 
   // Prénom
-  ctx.fillText(prenomAbo, 270, 545);
+  ctx.fillText(prenomAbo, 480, 545);
 
   // Email
-  ctx.fillText(emailAbo, 270, 570);
+  ctx.fillText(emailAbo, 480, 570);
 
   // Téléphone
-  ctx.fillText(telAbo, 270, 595);
+  ctx.fillText(telAbo, 480, 595);
 
   // Cases à cocher motifs
   ctx.font = "bold 22px Arial";
-  if (syndic) ctx.fillText("☑", 88, 732);
-  if (local) ctx.fillText("☑", 88, 757);
-  if (travaux) ctx.fillText("☑", 88, 782);
-  if (proprio) ctx.fillText("☑", 88, 807);
-  if (adsl) ctx.fillText("☑", 88, 832);
-  if (delai) ctx.fillText("☑", 88, 857);
+  if (syndic) ctx.fillText("☑", 130, 732);
+  if (local) ctx.fillText("☑", 130, 757);
+  if (travaux) ctx.fillText("☑", 130, 782);
+  if (proprio) ctx.fillText("☑", 130, 807);
+  if (adsl) ctx.fillText("☑", 130, 832);
+  if (delai) ctx.fillText("☑", 130, 857);
 
   // Commentaires de l'abonné
   if (cmtAbo) {
     ctx.font = "14px Arial";
-    const maxWidth = canvas.width - 340;
+    const maxWidth = canvas.width - 550;
     if (maxWidth > 0) {
       const lignesCmtAbo = wrapText(ctx, cmtAbo, maxWidth);
       let yAbo = 908;
       lignesCmtAbo.forEach(l => {
-        ctx.fillText(l, 270, yAbo);
+        ctx.fillText(l, 480, yAbo);
         yAbo += 18;
       });
     }
@@ -906,12 +954,12 @@ async function genererRefus() {
   // Commentaires de l'intervenant
   if (cmtTech) {
     ctx.font = "14px Arial";
-    const maxWidth = canvas.width - 340;
+    const maxWidth = canvas.width - 550;
     if (maxWidth > 0) {
       const lignesCmtTech = wrapText(ctx, cmtTech, maxWidth);
       let yTech = 988;
       lignesCmtTech.forEach(l => {
-        ctx.fillText(l, 270, yTech);
+        ctx.fillText(l, 480, yTech);
         yTech += 18;
       });
     }
