@@ -698,7 +698,7 @@ function initRefusCheckboxes() {
 }
 
 async function genererRefus() {
-  // Récupération des données
+  // Récupération des données (SANS validation)
   const nomTech = document.getElementById("r_nom_tech").value.trim();
   const date = document.getElementById("r_date").value;
   const heure = document.getElementById("r_heure").value;
@@ -717,29 +717,13 @@ async function genererRefus() {
   const cmtAbo = document.getElementById("r_cmt_abo").value.trim();
   const cmtTech = document.getElementById("r_cmt_tech").value.trim();
 
-  // Vérifications
-  if (!nomTech) return showToast("⚠ Nom du technicien requis");
-  if (!date) return showToast("⚠ Date requise");
-  if (!civMme && !civMr) return showToast("⚠ Choisissez Mme ou Mr");
-  if (!nomAbo) return showToast("⚠ NOM de l'abonné requis");
-  if (!isSignatureDrawing) return showToast("⚠ Signature requise");
-
   // Motifs cochés
-  const motifs = [];
-  if (document.getElementById("rcb_syndic").checked) 
-    motifs.push("Le Syndic refuse l'appareil dans les parties communes");
-  if (document.getElementById("rcb_local").checked) 
-    motifs.push("Je refuse l'appareil dans mon local");
-  if (document.getElementById("rcb_travaux").checked) 
-    motifs.push("Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux");
-  if (document.getElementById("rcb_proprio").checked) 
-    motifs.push("Le propriétaire refuse tous travaux dans le local");
-  if (document.getElementById("rcb_adsl").checked) 
-    motifs.push("Je suis satisfait de l'ADSL et ne veux pas la fibre");
-  if (document.getElementById("rcb_delai").checked) 
-    motifs.push("Délai des travaux supérieur à 45 jours");
-
-  if (motifs.length === 0) return showToast("⚠ Cochez au moins un motif");
+  const syndic = document.getElementById("rcb_syndic").checked;
+  const local = document.getElementById("rcb_local").checked;
+  const travaux = document.getElementById("rcb_travaux").checked;
+  const proprio = document.getElementById("rcb_proprio").checked;
+  const adsl = document.getElementById("rcb_adsl").checked;
+  const delai = document.getElementById("rcb_delai").checked;
 
   // Formatage date
   let dateFormatted = "";
@@ -748,130 +732,110 @@ async function genererRefus() {
     dateFormatted = `${d}/${m}/${y}`;
   }
 
-  // Création de l'image
+  // Charger l'image de la fiche originale
+  const img = new Image();
+  img.src = '/mnt/user-data/uploads/1000002376.jpg';
+  
+  await new Promise((resolve, reject) => {
+    img.onload = resolve;
+    img.onerror = reject;
+  });
+
+  // Création du canvas avec les dimensions de l'image
   const canvas = document.createElement("canvas");
-  canvas.width = 794;  // A4 @ 96 DPI
-  canvas.height = 1123;
+  canvas.width = img.width;
+  canvas.height = img.height;
   const ctx = canvas.getContext("2d");
 
-  // Fond blanc
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Dessiner l'image de fond
+  ctx.drawImage(img, 0, 0);
 
-  // Logo Free
-  ctx.fillStyle = "#c8102e";
-  ctx.font = "italic bold 52px Arial";
-  ctx.fillText("free", 60, 90);
+  // Maintenant on superpose les textes aux bons endroits
+  ctx.fillStyle = "#000";
+  ctx.textBaseline = "top";
 
-  // Titre
-  ctx.fillStyle = "#111";
-  ctx.font = "bold 18px Arial";
-  ctx.textAlign = "center";
-  ctx.fillText("CONSTAT DE REFUS D'INSTALLATION DE LA FIBRE OPTIQUE", canvas.width/2, 160);
+  // Nom de l'intervenant (remplace "Quentin CHIRAND")
+  ctx.font = "16px Arial";
+  ctx.fillText(nomTech, 410, 225);
 
-  ctx.textAlign = "left";
-  let y = 220;
+  // Date de l'intervention
+  ctx.fillText(dateFormatted, 70, 272);
 
-  // Section intervenant
-  ctx.font = "bold 14px Arial";
-  ctx.fillText("Informations relatives à l'intervention", 60, y);
-  y += 25;
+  // Heure de l'intervention
+  ctx.fillText(heure, 70, 312);
 
-  ctx.fillStyle = "#444";
-  ctx.font = "12px Arial";
-  ctx.fillText(`Nom, Prénom de l'intervenant : ${nomTech}`, 60, y);
-  y += 30;
-  ctx.fillText(`Date de l'intervention : ${dateFormatted}`, 60, y);
-  y += 30;
-  ctx.fillText(`Heure de l'intervention : ${heure || ""}`, 60, y);
-  y += 30;
-  ctx.fillText(`Lieu de l'intervention : ${lieu}`, 60, y);
-  y += 30;
-  ctx.fillText(`Numéro abonné IDC : ${idc}`, 60, y);
-  y += 30;
-  ctx.fillText(`Numéro de commande : ${commande}`, 60, y);
-  y += 40;
+  // Lieu de l'intervention
+  ctx.fillText(lieu, 70, 355);
 
-  // Section abonné
-  ctx.fillStyle = "#111";
-  ctx.font = "bold 14px Arial";
-  ctx.fillText("Informations relatives à l'abonné (ou son représentant) :", 60, y);
-  y += 25;
+  // Numéro abonné IDC
+  ctx.fillText(idc, 70, 390);
 
-  ctx.fillStyle = "#444";
-  ctx.font = "12px Arial";
-  const civ = civMme ? "☑ Mme     ☐ Mr" : "☐ Mme     ☑ Mr";
-  ctx.fillText(`Je soussigné(e) : ${civ}`, 60, y);
-  y += 30;
-  ctx.fillText(`NOM : ${nomAbo.toUpperCase()}`, 60, y);
-  y += 30;
-  ctx.fillText(`Prénom : ${prenomAbo}`, 60, y);
-  y += 30;
-  ctx.fillText(`E-mail : ${emailAbo}`, 60, y);
-  y += 30;
-  ctx.fillText(`N° de téléphone : ${telAbo}`, 60, y);
-  y += 40;
+  // Numéro de commande
+  ctx.fillText(commande, 70, 432);
 
-  // Déclaration de refus
-  ctx.fillStyle = "#111";
-  ctx.font = "12px Arial";
-  const lignes1 = wrapText(
-    ctx,
-    "Je déclare refuser l'installation de la fibre optique initialement prévue dans mon local, et demande à passer / rester (rayer la mention inutile) en ADSL pour les raisons suivantes :",
-    canvas.width - 120
-  );
-  lignes1.forEach(l => { ctx.fillText(l, 60, y); y += 20; });
-  y += 10;
+  // Checkbox civilité Mme (position x: 205, y: 497)
+  if (civMme) {
+    ctx.font = "bold 22px Arial";
+    ctx.fillText("☑", 205, 494);
+  }
 
-  // Motifs
-  ctx.fillStyle = "#444";
-  motifs.forEach(m => {
-    ctx.fillText("☑ " + m, 80, y);
-    y += 25;
-  });
-  y += 15;
+  // Checkbox civilité Mr (position x: 318, y: 497)
+  if (civMr) {
+    ctx.font = "bold 22px Arial";
+    ctx.fillText("☑", 318, 494);
+  }
 
-  // Commentaires abonné
+  // NOM
+  ctx.font = "16px Arial";
+  ctx.fillText(nomAbo.toUpperCase(), 70, 520);
+
+  // Prénom
+  ctx.fillText(prenomAbo, 70, 545);
+
+  // Email
+  ctx.fillText(emailAbo, 70, 570);
+
+  // Téléphone
+  ctx.fillText(telAbo, 70, 595);
+
+  // Cases à cocher motifs
+  ctx.font = "bold 22px Arial";
+  if (syndic) ctx.fillText("☑", 88, 732);
+  if (local) ctx.fillText("☑", 88, 757);
+  if (travaux) ctx.fillText("☑", 88, 782);
+  if (proprio) ctx.fillText("☑", 88, 807);
+  if (adsl) ctx.fillText("☑", 88, 832);
+  if (delai) ctx.fillText("☑", 88, 857);
+
+  // Commentaires de l'abonné
   if (cmtAbo) {
-    ctx.fillStyle = "#111";
-    ctx.font = "bold 12px Arial";
-    ctx.fillText("Commentaires de l'abonné :", 60, y);
-    y += 20;
-    ctx.fillStyle = "#444";
-    ctx.font = "12px Arial";
-    const lignesCmt = wrapText(ctx, cmtAbo, canvas.width - 120);
-    lignesCmt.forEach(l => { ctx.fillText(l, 60, y); y += 18; });
-    y += 15;
+    ctx.font = "14px Arial";
+    const lignesCmtAbo = wrapText(ctx, cmtAbo, canvas.width - 140);
+    let yAbo = 908;
+    lignesCmtAbo.forEach(l => {
+      ctx.fillText(l, 70, yAbo);
+      yAbo += 18;
+    });
   }
 
-  // Commentaires intervenant
+  // Commentaires de l'intervenant
   if (cmtTech) {
-    ctx.fillStyle = "#111";
-    ctx.font = "bold 12px Arial";
-    ctx.fillText("Commentaires de l'intervenant :", 60, y);
-    y += 20;
-    ctx.fillStyle = "#444";
-    ctx.font = "12px Arial";
-    const lignesCmt = wrapText(ctx, cmtTech, canvas.width - 120);
-    lignesCmt.forEach(l => { ctx.fillText(l, 60, y); y += 18; });
-    y += 15;
+    ctx.font = "14px Arial";
+    const lignesCmtTech = wrapText(ctx, cmtTech, canvas.width - 140);
+    let yTech = 988;
+    lignesCmtTech.forEach(l => {
+      ctx.fillText(l, 70, yTech);
+      yTech += 18;
+    });
   }
 
-  // Lieu et signature
-  y += 20;
-  ctx.fillStyle = "#111";
-  ctx.font = "12px Arial";
-  const aujourdhui = new Date();
-  const dateSignature = `${String(aujourdhui.getDate()).padStart(2, '0')}/${String(aujourdhui.getMonth()+1).padStart(2, '0')}/${aujourdhui.getFullYear()}`;
-  ctx.fillText(`A ${ville || "_________"}, le ${dateSignature}`, 60, y);
-  y += 20;
-  ctx.font = "italic 11px Arial";
-  ctx.fillText('Signature * (précédée de la mention « lu et approuvé »)', 60, y);
-  y += 15;
+  // Ville (après le "A")
+  ctx.font = "16px Arial";
+  ctx.fillText(ville, 310, 1125);
 
-  // Intégrer la signature
-  if (sigCanvas) {
-    ctx.drawImage(sigCanvas, 60, y, 300, 100);
+  // Signature
+  if (sigCanvas && isSignatureDrawing) {
+    ctx.drawImage(sigCanvas, 70, 1200, 350, 120);
   }
 
   generatedRefusDataURL = canvas.toDataURL("image/jpeg", 0.95);
