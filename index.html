@@ -199,10 +199,10 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
     </div>
   </div>
   <div class="tabs">
-    <button class="tab" onclick="showPage('index')">
+    <button class="tab active" onclick="showPage('index')">
       🏠 Accueil
     </button>
-    <button class="tab active" id="tab-travaux" onclick="showPage('form')">
+    <button class="tab" id="tab-travaux" onclick="showPage('form')">
       📋 Fiche Travaux
     </button>
     <button class="tab" id="tab-refus" onclick="showPage('refus-form')">
@@ -388,6 +388,7 @@ function showPage(id) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (id === "index") document.querySelectorAll(".tab")[0].classList.add("active");
   if (id === "form" || id === "apercu") document.getElementById("tab-travaux").classList.add("active");
+  if (id === "refus-form" || id === "refus-apercu") document.getElementById("tab-refus").classList.add("active");
   window.scrollTo(0,0);
 }
 
@@ -840,19 +841,19 @@ async function genererRefus() {
   ctx.fillText(nomTech, 410, 225);
 
   // Date de l'intervention
-  ctx.fillText(dateFormatted, 70, 272);
+  ctx.fillText(dateFormatted, 270, 272);
 
   // Heure de l'intervention
-  ctx.fillText(heure, 70, 312);
+  ctx.fillText(heure, 270, 312);
 
   // Lieu de l'intervention
-  ctx.fillText(lieu, 70, 355);
+  ctx.fillText(lieu, 270, 355);
 
   // Numéro abonné IDC
-  ctx.fillText(idc, 70, 390);
+  ctx.fillText(idc, 270, 390);
 
   // Numéro de commande
-  ctx.fillText(commande, 70, 432);
+  ctx.fillText(commande, 270, 432);
 
   // Checkbox civilité Mme (position x: 205, y: 497)
   if (civMme) {
@@ -868,16 +869,16 @@ async function genererRefus() {
 
   // NOM
   ctx.font = "16px Arial";
-  ctx.fillText(nomAbo.toUpperCase(), 70, 520);
+  ctx.fillText(nomAbo.toUpperCase(), 270, 520);
 
   // Prénom
-  ctx.fillText(prenomAbo, 70, 545);
+  ctx.fillText(prenomAbo, 270, 545);
 
   // Email
-  ctx.fillText(emailAbo, 70, 570);
+  ctx.fillText(emailAbo, 270, 570);
 
   // Téléphone
-  ctx.fillText(telAbo, 70, 595);
+  ctx.fillText(telAbo, 270, 595);
 
   // Cases à cocher motifs
   ctx.font = "bold 22px Arial";
@@ -891,12 +892,12 @@ async function genererRefus() {
   // Commentaires de l'abonné
   if (cmtAbo) {
     ctx.font = "14px Arial";
-    const maxWidth = canvas.width - 140;
+    const maxWidth = canvas.width - 340;
     if (maxWidth > 0) {
       const lignesCmtAbo = wrapText(ctx, cmtAbo, maxWidth);
       let yAbo = 908;
       lignesCmtAbo.forEach(l => {
-        ctx.fillText(l, 70, yAbo);
+        ctx.fillText(l, 270, yAbo);
         yAbo += 18;
       });
     }
@@ -905,12 +906,12 @@ async function genererRefus() {
   // Commentaires de l'intervenant
   if (cmtTech) {
     ctx.font = "14px Arial";
-    const maxWidth = canvas.width - 140;
+    const maxWidth = canvas.width - 340;
     if (maxWidth > 0) {
       const lignesCmtTech = wrapText(ctx, cmtTech, maxWidth);
       let yTech = 988;
       lignesCmtTech.forEach(l => {
-        ctx.fillText(l, 70, yTech);
+        ctx.fillText(l, 270, yTech);
         yTech += 18;
       });
     }
@@ -1055,7 +1056,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div>
         <div class="group-subtitle" style="padding:0 0 6px;">Signature du client — « lu et approuvé »</div>
         <div class="sig-wrap" id="sig-wrap">
-          <canvas id="sig-canvas" class="sig-canvas" height="160"></canvas>
+          <canvas id="sig-canvas" class="sig-canvas" height="160" ontouchstart=""></canvas>
           <button class="sig-clear" ontouchstart="" onclick="clearSig()">✕ Effacer</button>
           <div class="sig-hint">Signez ici avec le doigt</div>
         </div>
