@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -12,43 +11,43 @@ html,body{width:100%;background:#e8e8e8;font-family:Arial,sans-serif;color:#111;
 
 /* ── TOP BAR ── */
 .topbar{
-background:#111;
-padding:10px 16px 0;
-position:sticky;top:0;z-index:100;
-box-shadow:0 2px 8px rgba(0,0,0,.4);
+  background:#111;
+  padding:10px 16px 0;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
 .brand{
-display:flex;align-items:center;gap:10px;
-padding-bottom:10px;
-border-bottom:1px solid #2a2a2a;
+  display:flex;align-items:center;gap:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #2a2a2a;
 }
 .brand-logo{
-width:32px;height:32px;background:var(–rouge);border-radius:6px;
-display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  width:32px;height:32px;background:var(--rouge);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .brand-logo svg{display:block;}
 .brand-name{
-font-size:15px;font-weight:700;color:#fff;letter-spacing:.02em;line-height:1;
+  font-size:15px;font-weight:700;color:#fff;letter-spacing:.02em;line-height:1;
 }
 .brand-sub{
-font-size:10px;color:#666;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;
+  font-size:10px;color:#666;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;
 }
 
 /* ── TABS ── */
 .tabs{display:flex;gap:0;margin-top:0;}
 .tab{
-flex:1;background:none;border:none;border-bottom:3px solid transparent;
-color:#666;font-family:inherit;font-size:12px;font-weight:700;
-padding:11px 8px;cursor:pointer;text-align:center;
-letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-transition:color .15s;
+  flex:1;background:none;border:none;border-bottom:3px solid transparent;
+  color:#666;font-family:inherit;font-size:12px;font-weight:700;
+  padding:11px 8px;cursor:pointer;text-align:center;
+  letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:color .15s;
 }
-.tab.active{color:#fff;border-bottom-color:var(–rouge);}
+.tab.active{color:#fff;border-bottom-color:var(--rouge);}
 .tab.off{color:#333;cursor:default;}
 .tab-badge{
-display:inline-block;background:#333;color:#777;
-font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;
-margin-left:5px;vertical-align:middle;letter-spacing:.04em;
+  display:inline-block;background:#333;color:#777;
+  font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;
+  margin-left:5px;vertical-align:middle;letter-spacing:.04em;
 }
 
 .page{display:none;padding:12px;max-width:600px;margin:0 auto;}
@@ -56,48 +55,48 @@ margin-left:5px;vertical-align:middle;letter-spacing:.04em;
 
 /* ── PAGE INDEX ── */
 .index-hero{
-text-align:center;
-padding:28px 16px 20px;
+  text-align:center;
+  padding:28px 16px 20px;
 }
 .index-hero-icon{
-width:56px;height:56px;background:var(–rouge);border-radius:14px;
-display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+  width:56px;height:56px;background:var(--rouge);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
 }
 .index-hero h1{font-size:20px;font-weight:700;color:#111;margin-bottom:6px;}
 .index-hero p{font-size:13px;color:#666;line-height:1.5;}
 
 .modules-grid{
-display:flex;flex-direction:column;gap:12px;
-padding:0 0 24px;
+  display:flex;flex-direction:column;gap:12px;
+  padding:0 0 24px;
 }
 .module-card{
-background:#fff;border-radius:8px;
-box-shadow:0 1px 6px rgba(0,0,0,.1);
-overflow:hidden;cursor:pointer;
-display:flex;align-items:stretch;
--webkit-tap-highlight-color:transparent;
-touch-action:manipulation;
-transition:transform .1s, box-shadow .1s;
-border:2px solid transparent;
+  background:#fff;border-radius:8px;
+  box-shadow:0 1px 6px rgba(0,0,0,.1);
+  overflow:hidden;cursor:pointer;
+  display:flex;align-items:stretch;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform .1s, box-shadow .1s;
+  border:2px solid transparent;
 }
 .module-card:active{transform:scale(.98);box-shadow:0 1px 3px rgba(0,0,0,.1);}
 .module-card.available{border-color:transparent;}
 .module-card.soon{opacity:.6;cursor:default;}
 .module-card-stripe{
-width:6px;flex-shrink:0;
+  width:6px;flex-shrink:0;
 }
-.module-card-stripe.red{background:var(–rouge);}
+.module-card-stripe.red{background:var(--rouge);}
 .module-card-stripe.gray{background:#aaa;}
 .module-card-body{
-padding:16px;flex:1;
+  padding:16px;flex:1;
 }
 .module-card-top{
-display:flex;align-items:center;gap:12px;margin-bottom:8px;
+  display:flex;align-items:center;gap:12px;margin-bottom:8px;
 }
 .module-card-icon{
-width:40px;height:40px;border-radius:8px;
-display:flex;align-items:center;justify-content:center;flex-shrink:0;
-font-size:20px;
+  width:40px;height:40px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:20px;
 }
 .module-card-icon.red{background:#fce8eb;}
 .module-card-icon.gray{background:#f0f0f0;}
@@ -105,12 +104,12 @@ font-size:20px;
 .module-card-num{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
 .module-card-desc{font-size:12px;color:#666;line-height:1.5;}
 .module-card-arrow{
-display:flex;align-items:center;padding-right:14px;color:#ccc;flex-shrink:0;
+  display:flex;align-items:center;padding-right:14px;color:#ccc;flex-shrink:0;
 }
 .module-card.available .module-card-arrow{color:#999;}
 .module-status{
-display:inline-block;font-size:10px;font-weight:700;
-padding:2px 8px;border-radius:10px;margin-top:6px;letter-spacing:.04em;
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:10px;margin-top:6px;letter-spacing:.04em;
 }
 .module-status.ready{background:#e8f5e9;color:#2e7d32;}
 .module-status.soon{background:#f5f5f5;color:#999;}
@@ -119,24 +118,24 @@ padding:2px 8px;border-radius:10px;margin-top:6px;letter-spacing:.04em;
 
 /* Case à cocher — désactivée pendant le scroll */
 .cb-row{
-display:flex;align-items:center;gap:14px;
-padding:14px;border-bottom:1px solid #f0f0f0;
-cursor:pointer;user-select:none;
-/* PAS de pointer-events par défaut — géré par JS */
+  display:flex;align-items:center;gap:14px;
+  padding:14px;border-bottom:1px solid #f0f0f0;
+  cursor:pointer;user-select:none;
+  /* PAS de pointer-events par défaut — géré par JS */
 }
 .cb-row:last-child{border-bottom:none;}
 .cb-custom{
-flex-shrink:0;width:28px;height:28px;
-border:2px solid #aaa;border-radius:3px;background:#fff;
-display:flex;align-items:center;justify-content:center;
-transition:all .1s;pointer-events:none;
+  flex-shrink:0;width:28px;height:28px;
+  border:2px solid #aaa;border-radius:3px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .1s;pointer-events:none;
 }
 .cb-custom.on{background:#111;border-color:#111;}
 .cb-custom.on::after{
-content:’’;display:block;
-width:8px;height:13px;
-border:2.5px solid #fff;border-top:none;border-left:none;
-transform:rotate(45deg) translate(-1px,-2px);
+  content:'';display:block;
+  width:8px;height:13px;
+  border:2.5px solid #fff;border-top:none;border-left:none;
+  transform:rotate(45deg) translate(-1px,-2px);
 }
 .cb-label{font-size:13px;line-height:1.45;color:#222;pointer-events:none;}
 
@@ -154,7 +153,7 @@ transform:rotate(45deg) translate(-1px,-2px);
 #form-photo-input{display:none;}
 
 /* Bouton générer */
-.btn-generer{width:100%;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:16px;border:none;cursor:pointer;background:var(–rouge);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:4px;margin-bottom:20px;}
+.btn-generer{width:100%;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:16px;border:none;cursor:pointer;background:var(--rouge);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:4px;margin-bottom:20px;}
 .btn-generer:active{background:#a00d24;}
 
 /* Page aperçu */
@@ -218,7 +217,6 @@ transform:rotate(45deg) translate(-1px,-2px);
 </div>
 
 <!-- PAGE INDEX -->
-
 <div class="page active" id="page-index">
   <div class="index-hero">
     <div class="index-hero-icon">
@@ -232,51 +230,48 @@ transform:rotate(45deg) translate(-1px,-2px);
 
   <div class="modules-grid">
 
-```
-<!-- Module 1 -->
-<div class="module-card available" onclick="showPage('form')">
-  <div class="module-card-stripe red"></div>
-  <div class="module-card-body">
-    <div class="module-card-top">
-      <div class="module-card-icon red">📋</div>
-      <div>
-        <div class="module-card-num">Module 1</div>
-        <div class="module-card-title">Fiche Travaux Client</div>
+    <!-- Module 1 -->
+    <div class="module-card available" onclick="showPage('form')">
+      <div class="module-card-stripe red"></div>
+      <div class="module-card-body">
+        <div class="module-card-top">
+          <div class="module-card-icon red">📋</div>
+          <div>
+            <div class="module-card-num">Module 1</div>
+            <div class="module-card-title">Fiche Travaux Client</div>
+          </div>
+        </div>
+        <div class="module-card-desc">Génère une fiche travaux Free à remettre au client. Cochez les cases, ajoutez un schéma, exportez en image.</div>
+        <span class="module-status ready">✓ Disponible</span>
+      </div>
+      <div class="module-card-arrow">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>
-    <div class="module-card-desc">Génère une fiche travaux Free à remettre au client. Cochez les cases, ajoutez un schéma, exportez en image.</div>
-    <span class="module-status ready">✓ Disponible</span>
-  </div>
-  <div class="module-card-arrow">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-</div>
 
-<!-- Module 2 -->
-<div class="module-card available" onclick="showPage('refus-form')">
-  <div class="module-card-stripe red"></div>
-  <div class="module-card-body">
-    <div class="module-card-top">
-      <div class="module-card-icon red">🚫</div>
-      <div>
-        <div class="module-card-num">Module 2</div>
-        <div class="module-card-title">Fiche Refus Travaux</div>
+    <!-- Module 2 -->
+    <div class="module-card available" onclick="showPage('refus-form')">
+      <div class="module-card-stripe red"></div>
+      <div class="module-card-body">
+        <div class="module-card-top">
+          <div class="module-card-icon red">🚫</div>
+          <div>
+            <div class="module-card-num">Module 2</div>
+            <div class="module-card-title">Fiche Refus Travaux</div>
+          </div>
+        </div>
+        <div class="module-card-desc">Génère une fiche de refus d'intervention à remettre au client avec les motifs de blocage.</div>
+        <span class="module-status ready">✓ Disponible</span>
+      </div>
+      <div class="module-card-arrow">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>
-    <div class="module-card-desc">Génère une fiche de refus d'intervention à remettre au client avec les motifs de blocage.</div>
-    <span class="module-status ready">✓ Disponible</span>
-  </div>
-  <div class="module-card-arrow">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-</div>
-```
 
   </div>
 </div>
 
 <!-- PAGE FORMULAIRE -->
-
 <div class="page" id="page-form">
 
   <div class="group"><div class="group-title">Travaux extérieurs</div><label class="cb-row" id="row_gaine_verte">
@@ -361,7 +356,6 @@ transform:rotate(45deg) translate(-1px,-2px);
 </div>
 
 <!-- PAGE APERÇU -->
-
 <div class="page" id="page-apercu">
   <div class="apercu-actions">
     <button class="btn-dl btn-dl-back" onclick="showPage('form')">
@@ -394,7 +388,6 @@ function showPage(id) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (id === "index") document.querySelectorAll(".tab")[0].classList.add("active");
   if (id === "form" || id === "apercu") document.getElementById("tab-travaux").classList.add("active");
-  if (id === "refus-form" || id === "refus-apercu") document.getElementById("tab-refus").classList.add("active");
   window.scrollTo(0,0);
 }
 
@@ -494,7 +487,7 @@ function _doGenerate() {
         ctx.font = "30px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        const lines = wrapTextLines(ctx, text, TOP_W - 120);
+        const lines = wrapText(ctx, text, TOP_W - 120);
         lines.forEach((line, i) => ctx.fillText(line, TOP_W/2, sy + 50 + i * 46));
         ctx.textAlign = "left";
       } else {
@@ -557,7 +550,7 @@ function drawCheck(ctx, cx, cy, size) {
   ctx.stroke();
 }
 
-function wrapTextLines(ctx, text, maxW) {
+function wrapText(ctx, text, maxW) {
   const result = [];
   text.split("\n").forEach(para => {
     const words = para.split(" ");
@@ -586,14 +579,329 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 3000);
 }
+
+// ══════════════════════════════════════════════════════════════
+// MODULE 2 : FICHE DE REFUS
+// ══════════════════════════════════════════════════════════════
+
+let generatedRefusDataURL = null;
+let sigCanvas, sigCtx, isSignatureDrawing = false;
+
+// Initialiser le canvas de signature
+function initSignature() {
+  sigCanvas = document.getElementById("sig-canvas");
+  if (!sigCanvas) return;
+  sigCtx = sigCanvas.getContext("2d");
+  const wrap = document.getElementById("sig-wrap");
+  
+  // Adapter la taille du canvas
+  const resizeSigCanvas = () => {
+    const rect = wrap.getBoundingClientRect();
+    sigCanvas.width = rect.width;
+    sigCanvas.height = 160;
+    sigCtx.lineWidth = 2;
+    sigCtx.strokeStyle = "#111";
+    sigCtx.lineCap = "round";
+    sigCtx.lineJoin = "round";
+  };
+  resizeSigCanvas();
+  window.addEventListener("resize", resizeSigCanvas);
+
+  // Événements tactiles et souris
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+
+  function getPos(e) {
+    const rect = sigCanvas.getBoundingClientRect();
+    const touch = e.touches ? e.touches[0] : e;
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  }
+
+  function startDrawing(e) {
+    e.preventDefault();
+    drawing = true;
+    isSignatureDrawing = true;
+    const pos = getPos(e);
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function draw(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    sigCtx.beginPath();
+    sigCtx.moveTo(lastX, lastY);
+    sigCtx.lineTo(pos.x, pos.y);
+    sigCtx.stroke();
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function stopDrawing() {
+    drawing = false;
+  }
+
+  // Touch events
+  sigCanvas.addEventListener("touchstart", startDrawing, {passive: false});
+  sigCanvas.addEventListener("touchmove", draw, {passive: false});
+  sigCanvas.addEventListener("touchend", stopDrawing);
+  
+  // Mouse events
+  sigCanvas.addEventListener("mousedown", startDrawing);
+  sigCanvas.addEventListener("mousemove", draw);
+  sigCanvas.addEventListener("mouseup", stopDrawing);
+  sigCanvas.addEventListener("mouseleave", stopDrawing);
+}
+
+function clearSig() {
+  if (!sigCanvas || !sigCtx) return;
+  sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+  isSignatureDrawing = false;
+}
+
+// Gestion des cases à cocher de civilité
+function initRefusCheckboxes() {
+  // Civilité
+  const rcivMme = document.getElementById("rciv_mme");
+  const rcivMr = document.getElementById("rciv_mr");
+  const rcbvMme = document.getElementById("rcbv_mme");
+  const rcbvMr = document.getElementById("rcbv_mr");
+  
+  rcivMme.addEventListener("click", () => {
+    document.getElementById("r_mme").checked = true;
+    rcbvMme.classList.add("on");
+    rcbvMr.classList.remove("on");
+  });
+  
+  rcivMr.addEventListener("click", () => {
+    document.getElementById("r_mr").checked = true;
+    rcbvMr.classList.add("on");
+    rcbvMme.classList.remove("on");
+  });
+
+  // Cases à cocher des motifs
+  const motifs = ["syndic", "local", "travaux", "proprio", "adsl", "delai"];
+  motifs.forEach(id => {
+    const row = document.getElementById("rrow_" + id);
+    const cb = document.getElementById("rcb_" + id);
+    const visual = document.getElementById("rcbv_" + id);
+    
+    row.addEventListener("click", () => {
+      cb.checked = !cb.checked;
+      visual.classList.toggle("on", cb.checked);
+    });
+  });
+}
+
+async function genererRefus() {
+  // Récupération des données
+  const nomTech = document.getElementById("r_nom_tech").value.trim();
+  const date = document.getElementById("r_date").value;
+  const heure = document.getElementById("r_heure").value;
+  const lieu = document.getElementById("r_lieu").value.trim();
+  const idc = document.getElementById("r_idc").value.trim();
+  const commande = document.getElementById("r_commande").value.trim();
+  
+  const civMme = document.getElementById("r_mme").checked;
+  const civMr = document.getElementById("r_mr").checked;
+  const nomAbo = document.getElementById("r_nom_abo").value.trim();
+  const prenomAbo = document.getElementById("r_prenom_abo").value.trim();
+  const emailAbo = document.getElementById("r_email_abo").value.trim();
+  const telAbo = document.getElementById("r_tel_abo").value.trim();
+  
+  const ville = document.getElementById("r_ville").value.trim();
+  const cmtAbo = document.getElementById("r_cmt_abo").value.trim();
+  const cmtTech = document.getElementById("r_cmt_tech").value.trim();
+
+  // Vérifications
+  if (!nomTech) return showToast("⚠ Nom du technicien requis");
+  if (!date) return showToast("⚠ Date requise");
+  if (!civMme && !civMr) return showToast("⚠ Choisissez Mme ou Mr");
+  if (!nomAbo) return showToast("⚠ NOM de l'abonné requis");
+  if (!isSignatureDrawing) return showToast("⚠ Signature requise");
+
+  // Motifs cochés
+  const motifs = [];
+  if (document.getElementById("rcb_syndic").checked) 
+    motifs.push("Le Syndic refuse l'appareil dans les parties communes");
+  if (document.getElementById("rcb_local").checked) 
+    motifs.push("Je refuse l'appareil dans mon local");
+  if (document.getElementById("rcb_travaux").checked) 
+    motifs.push("Les travaux à ma charge sont trop couteux et je refuse d'engager des travaux");
+  if (document.getElementById("rcb_proprio").checked) 
+    motifs.push("Le propriétaire refuse tous travaux dans le local");
+  if (document.getElementById("rcb_adsl").checked) 
+    motifs.push("Je suis satisfait de l'ADSL et ne veux pas la fibre");
+  if (document.getElementById("rcb_delai").checked) 
+    motifs.push("Délai des travaux supérieur à 45 jours");
+
+  if (motifs.length === 0) return showToast("⚠ Cochez au moins un motif");
+
+  // Formatage date
+  let dateFormatted = "";
+  if (date) {
+    const [y, m, d] = date.split("-");
+    dateFormatted = `${d}/${m}/${y}`;
+  }
+
+  // Création de l'image
+  const canvas = document.createElement("canvas");
+  canvas.width = 794;  // A4 @ 96 DPI
+  canvas.height = 1123;
+  const ctx = canvas.getContext("2d");
+
+  // Fond blanc
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Logo Free
+  ctx.fillStyle = "#c8102e";
+  ctx.font = "italic bold 52px Arial";
+  ctx.fillText("free", 60, 90);
+
+  // Titre
+  ctx.fillStyle = "#111";
+  ctx.font = "bold 18px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("CONSTAT DE REFUS D'INSTALLATION DE LA FIBRE OPTIQUE", canvas.width/2, 160);
+
+  ctx.textAlign = "left";
+  let y = 220;
+
+  // Section intervenant
+  ctx.font = "bold 14px Arial";
+  ctx.fillText("Informations relatives à l'intervention", 60, y);
+  y += 25;
+
+  ctx.fillStyle = "#444";
+  ctx.font = "12px Arial";
+  ctx.fillText(`Nom, Prénom de l'intervenant : ${nomTech}`, 60, y);
+  y += 30;
+  ctx.fillText(`Date de l'intervention : ${dateFormatted}`, 60, y);
+  y += 30;
+  ctx.fillText(`Heure de l'intervention : ${heure || ""}`, 60, y);
+  y += 30;
+  ctx.fillText(`Lieu de l'intervention : ${lieu}`, 60, y);
+  y += 30;
+  ctx.fillText(`Numéro abonné IDC : ${idc}`, 60, y);
+  y += 30;
+  ctx.fillText(`Numéro de commande : ${commande}`, 60, y);
+  y += 40;
+
+  // Section abonné
+  ctx.fillStyle = "#111";
+  ctx.font = "bold 14px Arial";
+  ctx.fillText("Informations relatives à l'abonné (ou son représentant) :", 60, y);
+  y += 25;
+
+  ctx.fillStyle = "#444";
+  ctx.font = "12px Arial";
+  const civ = civMme ? "☑ Mme     ☐ Mr" : "☐ Mme     ☑ Mr";
+  ctx.fillText(`Je soussigné(e) : ${civ}`, 60, y);
+  y += 30;
+  ctx.fillText(`NOM : ${nomAbo.toUpperCase()}`, 60, y);
+  y += 30;
+  ctx.fillText(`Prénom : ${prenomAbo}`, 60, y);
+  y += 30;
+  ctx.fillText(`E-mail : ${emailAbo}`, 60, y);
+  y += 30;
+  ctx.fillText(`N° de téléphone : ${telAbo}`, 60, y);
+  y += 40;
+
+  // Déclaration de refus
+  ctx.fillStyle = "#111";
+  ctx.font = "12px Arial";
+  const lignes1 = wrapText(
+    ctx,
+    "Je déclare refuser l'installation de la fibre optique initialement prévue dans mon local, et demande à passer / rester (rayer la mention inutile) en ADSL pour les raisons suivantes :",
+    canvas.width - 120
+  );
+  lignes1.forEach(l => { ctx.fillText(l, 60, y); y += 20; });
+  y += 10;
+
+  // Motifs
+  ctx.fillStyle = "#444";
+  motifs.forEach(m => {
+    ctx.fillText("☑ " + m, 80, y);
+    y += 25;
+  });
+  y += 15;
+
+  // Commentaires abonné
+  if (cmtAbo) {
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 12px Arial";
+    ctx.fillText("Commentaires de l'abonné :", 60, y);
+    y += 20;
+    ctx.fillStyle = "#444";
+    ctx.font = "12px Arial";
+    const lignesCmt = wrapText(ctx, cmtAbo, canvas.width - 120);
+    lignesCmt.forEach(l => { ctx.fillText(l, 60, y); y += 18; });
+    y += 15;
+  }
+
+  // Commentaires intervenant
+  if (cmtTech) {
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 12px Arial";
+    ctx.fillText("Commentaires de l'intervenant :", 60, y);
+    y += 20;
+    ctx.fillStyle = "#444";
+    ctx.font = "12px Arial";
+    const lignesCmt = wrapText(ctx, cmtTech, canvas.width - 120);
+    lignesCmt.forEach(l => { ctx.fillText(l, 60, y); y += 18; });
+    y += 15;
+  }
+
+  // Lieu et signature
+  y += 20;
+  ctx.fillStyle = "#111";
+  ctx.font = "12px Arial";
+  const aujourdhui = new Date();
+  const dateSignature = `${String(aujourdhui.getDate()).padStart(2, '0')}/${String(aujourdhui.getMonth()+1).padStart(2, '0')}/${aujourdhui.getFullYear()}`;
+  ctx.fillText(`A ${ville || "_________"}, le ${dateSignature}`, 60, y);
+  y += 20;
+  ctx.font = "italic 11px Arial";
+  ctx.fillText('Signature * (précédée de la mention « lu et approuvé »)', 60, y);
+  y += 15;
+
+  // Intégrer la signature
+  if (sigCanvas) {
+    ctx.drawImage(sigCanvas, 60, y, 300, 100);
+  }
+
+  generatedRefusDataURL = canvas.toDataURL("image/jpeg", 0.95);
+  document.getElementById("apercu-refus").src = generatedRefusDataURL;
+  showPage("refus-apercu");
+  showToast("✓ Constat généré");
+}
+
+function telechargerRefus() {
+  if (!generatedRefusDataURL) return;
+  const a = document.createElement("a");
+  const now = new Date();
+  const p = n => String(n).padStart(2, "0");
+  a.download = `constat_refus_${p(now.getDate())}${p(now.getMonth()+1)}${now.getFullYear()}_${p(now.getHours())}${p(now.getMinutes())}.jpg`;
+  a.href = generatedRefusDataURL;
+  a.click();
+  showToast("✓ Constat enregistré");
+}
+
+// Initialiser au chargement
+document.addEventListener("DOMContentLoaded", () => {
+  initSignature();
+  initRefusCheckboxes();
+});
 </script>
 
 <!-- PAGE REFUS FORM -->
-
 <div class="page" id="page-refus-form">
 
   <!-- INTERVENANT -->
-
   <div class="group">
     <div class="group-title">Informations intervenant</div>
     <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
@@ -629,7 +937,6 @@ function showToast(msg) {
   </div>
 
   <!-- ABONNÉ -->
-
   <div class="group">
     <div class="group-title">Informations abonné</div>
     <div style="padding:12px 14px 4px;display:flex;flex-direction:column;gap:10px;">
@@ -652,7 +959,6 @@ function showToast(msg) {
   </div>
 
   <!-- RAISONS -->
-
   <div class="group">
     <div class="group-title">Motifs de refus</div>
     <label class="cb-row" id="rrow_syndic"><span class="cb-custom" id="rcbv_syndic"></span><span class="cb-label">Le Syndic refuse l'appareil dans les parties communes</span><input type="checkbox" id="rcb_syndic" style="display:none"></label>
@@ -664,7 +970,6 @@ function showToast(msg) {
   </div>
 
   <!-- COMMENTAIRES -->
-
   <div class="group">
     <div class="group-title">Commentaires abonné</div>
     <textarea id="r_cmt_abo" placeholder="Commentaires de l'abonné…" style="display:block;width:100%;min-height:90px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;line-height:1.6;color:#111;padding:12px 14px;"></textarea>
@@ -675,7 +980,6 @@ function showToast(msg) {
   </div>
 
   <!-- VILLE + SIGNATURE -->
-
   <div class="group">
     <div class="group-title">Lieu &amp; Signature</div>
     <div style="padding:12px 14px;display:flex;flex-direction:column;gap:12px;">
@@ -698,7 +1002,6 @@ function showToast(msg) {
 </div>
 
 <!-- PAGE REFUS APERÇU -->
-
 <div class="page" id="page-refus-apercu">
   <div class="apercu-actions">
     <button class="btn-dl btn-dl-back" onclick="showPage('refus-form')">
@@ -712,733 +1015,6 @@ function showToast(msg) {
   </div>
   <img id="apercu-refus" style="width:100%;display:block;border:1px solid #ccc;background:#fff;border-radius:4px;" alt="Aperçu constat refus">
 </div>
-<script>
-
-function genererRefus(){
-
-// Canvas format A4 en haute résolution (210mm x 297mm à 300dpi)
-const canvas = document.createElement(“canvas”);
-canvas.width = 2480;  // A4 width at 300dpi
-canvas.height = 3508; // A4 height at 300dpi
-
-const ctx = canvas.getContext(“2d”);
-
-// Fond blanc
-ctx.fillStyle = “#ffffff”;
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-// Marges exactes du document officiel
-const marginLeft = 165;
-const marginRight = 165;
-const contentWidth = canvas.width - marginLeft - marginRight;
-
-let y = 240;
-
-/* ══════════════════════════════════════════════════════════════════
-LOGO FREE (exactement comme sur le PDF officiel)
-══════════════════════════════════════════════════════════════════ */
-
-ctx.fillStyle = “#c8102e”;  // Rouge Free officiel
-ctx.font = “italic bold 135px Arial”;
-ctx.fillText(“free”, marginLeft, y);
-y += 25;
-
-// Ligne horizontale grise fine
-ctx.strokeStyle = “#d0d0d0”;
-ctx.lineWidth = 2;
-ctx.beginPath();
-ctx.moveTo(marginLeft, y);
-ctx.lineTo(canvas.width - marginRight, y);
-ctx.stroke();
-y += 130;
-
-/* ══════════════════════════════════════════════════════════════════
-TITRE (centré, gras, noir)
-══════════════════════════════════════════════════════════════════ */
-
-ctx.fillStyle = “#000000”;
-ctx.font = “bold 52px Arial”;
-ctx.textAlign = “center”;
-ctx.fillText(“CONSTAT DE REFUS D’INSTALLATION DE LA FIBRE OPTIQUE”, canvas.width / 2, y);
-ctx.textAlign = “left”;
-y += 100;
-
-/* ══════════════════════════════════════════════════════════════════
-SECTION 1: INFORMATIONS RELATIVES À L’INTERVENTION
-══════════════════════════════════════════════════════════════════ */
-
-// Titre de section (gras, souligné)
-ctx.font = “bold 34px Arial”;
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Informations relatives à l’intervention”, marginLeft, y);
-y += 8;
-
-// Ligne de soulignement
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1.5;
-ctx.beginPath();
-ctx.moveTo(marginLeft, y);
-ctx.lineTo(1420, y);  // Longueur exacte de la ligne
-ctx.stroke();
-y += 45;
-
-// Récupération des données du formulaire
-const nomTech = document.getElementById(“r_nom_tech”).value || “”;
-const dateInterv = document.getElementById(“r_date”).value || “”;
-const heureInterv = document.getElementById(“r_heure”).value || “”;
-const lieuInterv = document.getElementById(“r_lieu”).value || “”;
-const idc = document.getElementById(“r_idc”).value || “”;
-const commande = document.getElementById(“r_commande”).value || “”;
-
-ctx.font = “30px Arial”;
-ctx.fillStyle = “#000000”;
-
-// Nom intervenant avec ligne
-ctx.fillText(“Nom, Prénom de l’intervenant :”, marginLeft, y);
-const nomWidth = ctx.measureText(“Nom, Prénom de l’intervenant :”).width;
-ctx.fillText(nomTech, marginLeft + nomWidth + 15, y);
-
-// Ligne sous le nom
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1;
-ctx.beginPath();
-ctx.moveTo(marginLeft + nomWidth + 10, y + 8);
-ctx.lineTo(canvas.width - marginRight, y + 8);
-ctx.stroke();
-y += 55;
-
-// Date de l’intervention
-ctx.fillText(“Date de l’intervention”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.lineWidth = 1;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (dateInterv) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(dateInterv, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Heure de l’intervention
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Heure de l’intervention :”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (heureInterv) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(heureInterv, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Lieu de l’intervention
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Lieu de l’intervention”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (lieuInterv) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(lieuInterv, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Numéro abonné IDC
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Numéro abonné IDC :”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (idc) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(idc, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Numéro de commande
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Numéro de commande”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (commande) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(commande, marginLeft + 15, y + 35);
-}
-y += 75;
-
-/* ══════════════════════════════════════════════════════════════════
-SECTION 2: INFORMATIONS RELATIVES À L’ABONNÉ
-══════════════════════════════════════════════════════════════════ */
-
-// Titre de section
-ctx.font = “bold 34px Arial”;
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Informations relatives à l’abonné”, marginLeft, y);
-
-// Texte italique entre parenthèses
-ctx.font = “italic 28px Arial”;
-ctx.fillStyle = “#555555”;
-const mainTitleWidth = 680;
-ctx.fillText(”(ou son représentant)”, marginLeft + mainTitleWidth + 10, y);
-ctx.fillText(”:”, marginLeft + mainTitleWidth + 405, y);
-y += 8;
-
-// Ligne de soulignement
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1.5;
-ctx.beginPath();
-ctx.moveTo(marginLeft, y);
-ctx.lineTo(canvas.width - marginRight, y);
-ctx.stroke();
-y += 45;
-
-// Récupération données abonné
-const isMme = document.getElementById(“r_mme”).checked;
-const isMr = document.getElementById(“r_mr”).checked;
-const nomAbo = document.getElementById(“r_nom_abo”).value || “”;
-const prenomAbo = document.getElementById(“r_prenom_abo”).value || “”;
-const emailAbo = document.getElementById(“r_email_abo”).value || “”;
-const telAbo = document.getElementById(“r_tel_abo”).value || “”;
-
-// Je soussigné(e) avec checkboxes
-ctx.font = “30px Arial”;
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Je soussigné(e) :”, marginLeft, y);
-
-// Position des checkboxes
-const checkboxSize = 28;
-const checkboxY = y - 22;
-const mmeX = 515;
-const mrX = 680;
-
-// Checkbox Mme
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1.5;
-ctx.strokeRect(mmeX, checkboxY, checkboxSize, checkboxSize);
-if (isMme) {
-ctx.fillStyle = “#000000”;
-ctx.font = “bold 32px Arial”;
-ctx.fillText(“✓”, mmeX + 4, y - 1);
-ctx.font = “30px Arial”;
-}
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Mme”, mmeX + checkboxSize + 15, y);
-
-// Checkbox Mr
-ctx.strokeRect(mrX, checkboxY, checkboxSize, checkboxSize);
-if (isMr) {
-ctx.fillStyle = “#000000”;
-ctx.font = “bold 32px Arial”;
-ctx.fillText(“✓”, mrX + 4, y - 1);
-ctx.font = “30px Arial”;
-}
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Mr”, mrX + checkboxSize + 15, y);
-y += 55;
-
-// NOM
-ctx.fillText(“NOM:”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (nomAbo) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(nomAbo.toUpperCase(), marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Prénom
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Prénom :”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (prenomAbo) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(prenomAbo, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// E-mail
-ctx.fillStyle = “#000000”;
-ctx.fillText(“E-mail :”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (emailAbo) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(emailAbo, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// N° de téléphone
-ctx.fillStyle = “#000000”;
-ctx.fillText(“N° de téléphone :”, marginLeft, y);
-y += 8;
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, 48);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, 48);
-if (telAbo) {
-ctx.fillStyle = “#000000”;
-ctx.fillText(telAbo, marginLeft + 15, y + 35);
-}
-y += 60;
-
-// Ligne horizontale de séparation
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1.5;
-ctx.beginPath();
-ctx.moveTo(marginLeft, y);
-ctx.lineTo(canvas.width - marginRight, y);
-ctx.stroke();
-y += 50;
-
-/* ══════════════════════════════════════════════════════════════════
-DÉCLARATION DE REFUS
-══════════════════════════════════════════════════════════════════ */
-
-ctx.font = “28px Arial”;
-ctx.fillStyle = “#000000”;
-
-const declaLine1 = “Je déclare refuser l’installation de la fibre optique initialement prévue dans mon local, et demander à”;
-const declaLine2 = “passer / rester “;
-const declaLine2Italic = “(rayer la mention inutile)”;
-const declaLine2End = “ en ADSL pour les raisons suivantes :”;
-
-ctx.fillText(declaLine1, marginLeft, y);
-y += 40;
-
-// Ligne 2 avec texte italique
-ctx.fillText(declaLine2, marginLeft, y);
-const line2Width = ctx.measureText(declaLine2).width;
-
-ctx.font = “italic 28px Arial”;
-ctx.fillText(declaLine2Italic, marginLeft + line2Width, y);
-const italicWidth = ctx.measureText(declaLine2Italic).width;
-
-ctx.font = “28px Arial”;
-ctx.fillText(declaLine2End, marginLeft + line2Width + italicWidth, y);
-y += 55;
-
-/* ══════════════════════════════════════════════════════════════════
-LISTE DES RAISONS AVEC CHECKBOXES
-══════════════════════════════════════════════════════════════════ */
-
-const reasonCheckSize = 26;
-const reasonIndent = marginLeft + 50;
-const reasonTextX = reasonIndent + reasonCheckSize + 25;
-
-const reasons = [
-{ id: “rcb_syndic”, text: “Le Syndic refuse l’appareil dans les parties communes” },
-{ id: “rcb_local”, text: “Je refuse l’appareil dans mon local ;” },
-{ id: “rcb_travaux”, text: “Les travaux à ma charge sont trop couteux et je refuse d’engager des travaux ;” },
-{ id: “rcb_proprio”, text: “Le propriétaire refuse tous travaux dans le local ;” },
-{ id: “rcb_adsl”, text: “Je suis satisfait de l’ADSL et ne veux pas la fibre ;” },
-{ id: “rcb_delai”, text: “Délai des travaux supérieur à 45 jours.” }
-];
-
-ctx.font = “26px Arial”;
-reasons.forEach(reason => {
-const isChecked = document.getElementById(reason.id).checked;
-const checkY = y - 20;
-
-// Dessiner checkbox vide
-ctx.strokeStyle = “#000000”;
-ctx.lineWidth = 1.5;
-ctx.strokeRect(reasonIndent, checkY, reasonCheckSize, reasonCheckSize);
-
-if (isChecked) {
-// Coche noire
-ctx.fillStyle = “#000000”;
-ctx.font = “bold 30px Arial”;
-ctx.fillText(“✓”, reasonIndent + 3, y - 1);
-ctx.font = “26px Arial”;
-}
-
-// Texte de la raison
-ctx.fillStyle = “#000000”;
-ctx.fillText(reason.text, reasonTextX, y);
-y += 45;
-});
-
-y += 15;
-
-/* ══════════════════════════════════════════════════════════════════
-COMMENTAIRES
-══════════════════════════════════════════════════════════════════ */
-
-const cmtAbo = document.getElementById(“r_cmt_abo”).value || “”;
-const cmtTech = document.getElementById(“r_cmt_tech”).value || “”;
-const commentBoxHeight = 170;
-
-// Commentaires de l’abonné
-ctx.font = “30px Arial”;
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Commentaires de l’abonné :”, marginLeft, y);
-y += 15;
-
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, commentBoxHeight);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.lineWidth = 1;
-ctx.strokeRect(marginLeft, y, contentWidth, commentBoxHeight);
-
-if (cmtAbo) {
-ctx.fillStyle = “#000000”;
-ctx.font = “24px Arial”;
-wrapText(ctx, cmtAbo, marginLeft + 15, y + 35, contentWidth - 30, 35);
-}
-y += commentBoxHeight + 40;
-
-// Commentaires de l’intervenant
-ctx.font = “30px Arial”;
-ctx.fillStyle = “#000000”;
-ctx.fillText(“Commentaires de l’intervenant :”, marginLeft, y);
-y += 15;
-
-ctx.fillStyle = “#ebebeb”;
-ctx.fillRect(marginLeft, y, contentWidth, commentBoxHeight);
-ctx.strokeStyle = “#d0d0d0”;
-ctx.strokeRect(marginLeft, y, contentWidth, commentBoxHeight);
-
-if (cmtTech) {
-ctx.fillStyle = “#000000”;
-ctx.font = “24px Arial”;
-wrapText(ctx, cmtTech, marginLeft + 15, y + 35, contentWidth - 30, 35);
-}
-y += commentBoxHeight + 70;
-
-/* ══════════════════════════════════════════════════════════════════
-BAS DE PAGE: VILLE, DATE, SIGNATURE
-══════════════════════════════════════════════════════════════════ */
-
-const ville = document.getElementById(“r_ville”).value || “”;
-const dateStr = new Date().toLocaleDateString(“fr-FR”);
-
-ctx.font = “30px Arial”;
-ctx.fillStyle = “#000000”;
-
-// Texte “A [ville], le [date]”
-const villeText = ville || “_____________”;
-ctx.fillText(“A”, marginLeft, y);
-const aWidth = ctx.measureText(“A “).width;
-ctx.fillText(villeText, marginLeft + aWidth, y);
-const villeWidth = ctx.measureText(villeText).width;
-ctx.fillText(”, le “ + dateStr, marginLeft + aWidth + villeWidth, y);
-y += 8;
-
-// Texte signature aligné à droite
-ctx.font = “italic 26px Arial”;
-ctx.fillStyle = “#666666”;
-ctx.textAlign = “right”;
-ctx.fillText(“Signature * (précédée de la mention « lu et approuvé »)”, canvas.width - marginRight, y);
-ctx.textAlign = “left”;
-y += 20;
-
-// Zone signature
-const sigCanvas = document.getElementById(“sig-canvas”);
-if (sigCanvas) {
-const sigWidth = 480;
-const sigHeight = 190;
-const sigX = canvas.width - marginRight - sigWidth;
-const sigY = y;
-
-ctx.drawImage(sigCanvas, 0, 0, sigCanvas.width, sigCanvas.height, sigX, sigY, sigWidth, sigHeight);
-}
-
-/* ══════════════════════════════════════════════════════════════════
-GÉNÉRATION ET AFFICHAGE
-══════════════════════════════════════════════════════════════════ */
-
-document.getElementById(“apercu-refus”).src = canvas.toDataURL(“image/png”);
-showPage(“refus-apercu”);
-
-}
-
-/* téléchargement */
-
-function telechargerRefus(){
-
-const img = document.getElementById(“apercu-refus”).src;
-
-const a = document.createElement(“a”);
-
-a.href = img;
-a.download = “constat_refus_fibre.png”;
-
-a.click();
-
-showToast(“✓ Image enregistrée”);
-
-}
-
-/* gestion texte long */
-
-function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-
-const words = text.split(’ ’);
-let line = ‘’;
-
-for(let n = 0; n < words.length; n++) {
-
-const testLine = line + words[n] + ’ ’;
-const metrics = ctx.measureText(testLine);
-const testWidth = metrics.width;
-
-if (testWidth > maxWidth && n > 0) {
-ctx.fillText(line, x, y);
-line = words[n] + ’ ’;
-y += lineHeight;
-}
-
-else {
-line = testLine;
-}
-
-}
-
-ctx.fillText(line, x, y);
-
-}
-
-// ══════════════════════════════════════════════════════════════════
-// EVENT LISTENERS POUR LE FORMULAIRE DE REFUS
-// ══════════════════════════════════════════════════════════════════
-
-// Gestion des checkboxes du formulaire de refus
-const refusCheckboxes = [‘syndic’, ‘local’, ‘travaux’, ‘proprio’, ‘adsl’, ‘delai’];
-
-refusCheckboxes.forEach(name => {
-const row = document.getElementById(‘rrow_’ + name);
-if (!row) return;
-
-let touchStartY = 0, touchStartX = 0, moved = false;
-
-row.addEventListener(“touchstart”, function(e) {
-touchStartY = e.touches[0].clientY;
-touchStartX = e.touches[0].clientX;
-moved = false;
-});
-
-row.addEventListener(“touchmove”, function(e) {
-const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
-const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
-if (deltaY > 8 || deltaX > 8) moved = true;
-});
-
-row.addEventListener(“touchend”, function(e) {
-if (!moved) {
-e.preventDefault();
-toggleRefus(row);
-}
-});
-
-row.addEventListener(“click”, function(e) {
-if (!(‘ontouchstart’ in window)) toggleRefus(row);
-});
-});
-
-function toggleRefus(row) {
-const input = row.querySelector(“input[type=checkbox]”);
-const vis = row.querySelector(”.cb-custom”);
-input.checked = !input.checked;
-vis.classList.toggle(“on”, input.checked);
-}
-
-// Gestion des boutons radio civilité (Mme/Mr)
-[‘mme’, ‘mr’].forEach(civ => {
-const label = document.getElementById(‘rciv_’ + civ);
-if (!label) return;
-
-let touchStartY = 0, touchStartX = 0, moved = false;
-
-label.addEventListener(“touchstart”, function(e) {
-touchStartY = e.touches[0].clientY;
-touchStartX = e.touches[0].clientX;
-moved = false;
-});
-
-label.addEventListener(“touchmove”, function(e) {
-const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
-const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
-if (deltaY > 8 || deltaX > 8) moved = true;
-});
-
-label.addEventListener(“touchend”, function(e) {
-if (!moved) {
-e.preventDefault();
-selectCivilite(civ);
-}
-});
-
-label.addEventListener(“click”, function(e) {
-if (!(‘ontouchstart’ in window)) selectCivilite(civ);
-});
-});
-
-function selectCivilite(civ) {
-// Décocher tous
-[‘mme’, ‘mr’].forEach(c => {
-document.getElementById(‘r_’ + c).checked = false;
-document.getElementById(‘rciv_’ + c).style.borderColor = ‘#ddd’;
-document.getElementById(‘rcbv_’ + c).classList.remove(‘on’);
-});
-
-// Cocher celui sélectionné
-document.getElementById(‘r_’ + civ).checked = true;
-document.getElementById(‘rciv_’ + civ).style.borderColor = ‘var(–rouge)’;
-document.getElementById(‘rcbv_’ + civ).classList.add(‘on’);
-}
-
-// ══════════════════════════════════════════════════════════════════
-// SYSTÈME DE DESSIN SUR LE CANVAS DE SIGNATURE
-// ══════════════════════════════════════════════════════════════════
-
-const sigCanvas = document.getElementById(‘sig-canvas’);
-const sigCtx = sigCanvas.getContext(‘2d’);
-let drawing = false;
-let lastX = 0;
-let lastY = 0;
-
-// Ajuster la taille du canvas
-function resizeSigCanvas() {
-// Sauvegarder le contenu actuel du canvas avant le resize
-const imageData = sigCtx.getImageData(0, 0, sigCanvas.width, sigCanvas.height);
-const tempCanvas = document.createElement(‘canvas’);
-tempCanvas.width = sigCanvas.width;
-tempCanvas.height = sigCanvas.height;
-const tempCtx = tempCanvas.getContext(‘2d’);
-tempCtx.putImageData(imageData, 0, 0);
-
-// Redimensionner
-const rect = sigCanvas.getBoundingClientRect();
-const newWidth = rect.width * 2; // Retina
-const newHeight = 160 * 2;
-
-// Si la taille n’a pas changé, ne rien faire
-if (sigCanvas.width === newWidth && sigCanvas.height === newHeight) {
-return;
-}
-
-sigCanvas.width = newWidth;
-sigCanvas.height = newHeight;
-sigCtx.scale(2, 2);
-sigCtx.lineCap = ‘round’;
-sigCtx.lineJoin = ‘round’;
-sigCtx.strokeStyle = ‘#111’;
-sigCtx.lineWidth = 2;
-
-// Restaurer le contenu sauvegardé
-if (tempCanvas.width > 0 && tempCanvas.height > 0) {
-sigCtx.drawImage(tempCanvas, 0, 0);
-}
-}
-
-resizeSigCanvas();
-
-// Utiliser resize observer au lieu de window.resize pour éviter les faux resize
-let resizeTimeout;
-window.addEventListener(‘resize’, function() {
-clearTimeout(resizeTimeout);
-resizeTimeout = setTimeout(resizeSigCanvas, 250);
-});
-
-// Touch events
-sigCanvas.addEventListener(‘touchstart’, function(e) {
-e.preventDefault();
-const rect = sigCanvas.getBoundingClientRect();
-lastX = e.touches[0].clientX - rect.left;
-lastY = e.touches[0].clientY - rect.top;
-drawing = true;
-
-// Cacher le hint
-const hint = document.querySelector(’.sig-hint’);
-if (hint) hint.style.display = ‘none’;
-});
-
-sigCanvas.addEventListener(‘touchmove’, function(e) {
-e.preventDefault();
-if (!drawing) return;
-
-const rect = sigCanvas.getBoundingClientRect();
-const x = e.touches[0].clientX - rect.left;
-const y = e.touches[0].clientY - rect.top;
-
-sigCtx.beginPath();
-sigCtx.moveTo(lastX, lastY);
-sigCtx.lineTo(x, y);
-sigCtx.stroke();
-
-lastX = x;
-lastY = y;
-});
-
-sigCanvas.addEventListener(‘touchend’, function(e) {
-e.preventDefault();
-drawing = false;
-});
-
-// Mouse events (pour desktop)
-sigCanvas.addEventListener(‘mousedown’, function(e) {
-const rect = sigCanvas.getBoundingClientRect();
-lastX = e.clientX - rect.left;
-lastY = e.clientY - rect.top;
-drawing = true;
-
-const hint = document.querySelector(’.sig-hint’);
-if (hint) hint.style.display = ‘none’;
-});
-
-sigCanvas.addEventListener(‘mousemove’, function(e) {
-if (!drawing) return;
-
-const rect = sigCanvas.getBoundingClientRect();
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
-
-sigCtx.beginPath();
-sigCtx.moveTo(lastX, lastY);
-sigCtx.lineTo(x, y);
-sigCtx.stroke();
-
-lastX = x;
-lastY = y;
-});
-
-sigCanvas.addEventListener(‘mouseup’, function() {
-drawing = false;
-});
-
-sigCanvas.addEventListener(‘mouseleave’, function() {
-drawing = false;
-});
-
-// Fonction pour effacer la signature
-function clearSig() {
-sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-const hint = document.querySelector(’.sig-hint’);
-if (hint) hint.style.display = ‘block’;
-}
-
-</script>
 
 </body>
 </html>
